@@ -16,3 +16,9 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/loads', function () {
+	$path = storage_path() . "/json/loads.json";
+	$json = json_decode(file_get_contents($path), true);
+    return $json;
+});
