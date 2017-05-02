@@ -8,8 +8,46 @@
 				@include('layouts.sidebar')
 			</div>
 			<div class="column is-offset-1 is-6">
+				@if(empty($origin))
+				<h1 class="title is-3">Canada</h1>
+				@else
 				<h1 class="title is-3">{{$origin}}</h1>
-				<canvas id="myChart"></canvas>
+				@endif
+				<nav class="level">
+					<div class="level-item has-text-centered">
+						<div>
+							<p class="heading">Total Loads Last Month </p>
+							<p class="title">429,779</p>
+						</div>
+					</div>
+					<div class="level-item has-text-centered">
+						<div>
+							<p class="heading">Month-over-month</p>
+							<p class="title"><span class="tag is-success is-large">+ 33%</span></p>
+						</div>
+					</div>
+					<div class="level-item has-text-centered">
+						<div>
+							<p class="heading">Year-over-year</p>
+							<p class="title"><span class="tag is-success is-large">+ 51%</span></p>
+						</div>
+					</div>
+				</nav>
+				<div class="box">
+					<canvas id="lineChart"></canvas>
+				</div>
+				<div class="columns">
+					<div class="column is-half">
+						<div class="box">
+							<canvas id="doughnutChart"></canvas>
+						</div>
+					</div>
+					<div class="column is-half">
+						<div class="box">
+							<canvas id="radarChart"></canvas>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -19,9 +57,9 @@
 @section('script-footer')
 <script type="text/javascript">
 	$(document).ready(function(){
-		var ctx = document.getElementById("myChart");
-
-		var data = {
+		// Line Chart and Data
+		var lineChart = document.getElementById("lineChart");
+		var lineChartData = {
 			labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "Octobor", "Novemver", "December"],
 			datasets: [
 			{
@@ -133,13 +171,34 @@
 				pointHitRadius: 10,
 				data: [199, 201, 236, 207, 252, 247, 197, 220, 231, 213, 226, 258],
 				spanGaps: false,
+			},
+			{
+				label: "2017",
+				fill: false,
+				lineTension: 0.1,
+				backgroundColor: "rgba(80,227,194,0.4)",
+				borderColor: "rgba(80,227,194,1)",
+				borderCapStyle: 'butt',
+				borderDash: [],
+				borderDashOffset: 0.0,
+				borderJoinStyle: 'miter',
+				pointBorderColor: "rgba(80,227,194,1)",
+				pointBackgroundColor: "#fff",
+				pointBorderWidth: 1,
+				pointHoverRadius: 5,
+				pointHoverBackgroundColor: "rgba(80,227,194,1)",
+				pointHoverBorderColor: "rgba(220,220,220,1)",
+				pointHoverBorderWidth: 2,
+				pointRadius: 1,
+				pointHitRadius: 10,
+				data: [284, 269, 357],
+				spanGaps: false,
 			}
 			]
 		};
-
-		var myLineChart = new Chart(ctx, {
+		var myLineChart = new Chart(lineChart, {
 			type: 'line',
-			data: data,
+			data: lineChartData,
 			options: {
 				title: {
 					display: true,
@@ -147,6 +206,78 @@
 				}
 			}
 		});
+
+		var doughnutChart = document.getElementById("doughnutChart");
+		var doughnutChartData = {
+			labels: [
+			"Cross-border Loads",
+			"Intra-Canada Loads",
+			"Other"
+			],
+			datasets: [
+			{
+				data: [71, 27, 2],
+				backgroundColor: [
+				"#0079A7",
+				"#00AAE9",
+				"#7ED3F3"
+				],
+				hoverBackgroundColor: [
+				"#0079A7",
+				"#00AAE9",
+				"#7ED3F3"
+				]
+			}]
+		};
+		var myDoughnutChart = new Chart(doughnutChart, {
+			type: 'doughnut',
+			data: doughnutChartData,
+			options: {
+				title: {
+					display: true,
+					text: 'March 2017 Loads Volumns'
+				}
+			}
+		});
+
+		var radarChart = document.getElementById("radarChart");
+		var radarChartData = {
+			labels: ["Western", "Ontario", "Quebec", "Atlantic"],
+			datasets: [
+			{
+				label: "By Region of Origin ",
+				backgroundColor: "rgba(179,181,198,0.2)",
+				borderColor: "rgba(179,181,198,1)",
+				pointBackgroundColor: "rgba(179,181,198,1)",
+				pointBorderColor: "#fff",
+				pointHoverBackgroundColor: "#fff",
+				pointHoverBorderColor: "rgba(179,181,198,1)",
+				data: [42, 35, 18, 5]
+			},
+			{
+				label: "By Region of Destination",
+				backgroundColor: "rgba(255,99,132,0.2)",
+				borderColor: "rgba(255,99,132,1)",
+				pointBackgroundColor: "rgba(255,99,132,1)",
+				pointBorderColor: "#fff",
+				pointHoverBackgroundColor: "#fff",
+				pointHoverBorderColor: "rgba(255,99,132,1)",
+				data: [35, 33, 27, 5]
+			}
+			]
+		};
+		var myRadarChart = new Chart(radarChart, {
+			type: "radar",
+			data: radarChartData,
+			options: {
+				title: {
+					display: true,
+					text: 'March 2017 Loads within Canada Distribution'
+				}
+			}
+		});
+
+
 	})
 </script>
 @endsection
