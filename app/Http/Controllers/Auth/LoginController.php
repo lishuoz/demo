@@ -28,6 +28,21 @@ class LoginController extends Controller
     protected $redirectTo = '/home';
 
     /**
+     * Overwrite showLoginForm and set previouse url to session.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showLoginForm()
+    {
+        if(!session()->has('url.intended'))
+        {
+            session(['url.intended' => url()->previous()]);
+        }
+
+        return view('auth.login');    
+    }
+
+    /**
      * Create a new controller instance.
      *
      * @return void
