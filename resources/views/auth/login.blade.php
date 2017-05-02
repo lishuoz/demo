@@ -9,7 +9,7 @@
       <div class="container">
         <div class="nav-left">
           <a class="nav-item" href="/">
-            <img src="images/bulma-type-white.png" alt="Logo">
+           <img src="/img/BL_logo.png" alt="Better Loads logo">
           </a>
         </div>
         <span class="nav-toggle">

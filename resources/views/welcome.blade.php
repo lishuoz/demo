@@ -143,7 +143,7 @@
 			options: {
 				title: {
 					display: true,
-					text: 'TransCore Canadian Spot Market Freight Index 2012-2016'
+					text: 'Canadian Spot Market Freight Index 2012-2016'
 				}
 			}
 		});
