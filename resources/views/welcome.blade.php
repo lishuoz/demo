@@ -4,50 +4,62 @@
 <section class="section">
 	<div class="container">
 		<div class="columns">
-			<div class="column is-offset-1 is-2">
+			<div class="column is-2">
 				@include('layouts.sidebar')
 			</div>
-			<div class="column is-offset-1 is-6">
+			<div class="column is-10">
 				@if(empty($origin))
 				<h1 class="title is-3" id="origin">Canada</h1>
 				@else
 				<h1 class="title is-3" id="origin">{{$origin}}</h1>
 				@endif
-				<nav class="level">
-					<div class="level-item has-text-centered">
-						<div>
-							<p class="heading">Total Loads Last Month </p>
-							<p class="title">429,779</p>
-						</div>
-					</div>
-					<div class="level-item has-text-centered">
-						<div>
-							<p class="heading">Month-over-month</p>
-							<p class="title"><span class="tag is-success is-large">+ 33%</span></p>
-						</div>
-					</div>
-					<div class="level-item has-text-centered">
-						<div>
-							<p class="heading">Year-over-year</p>
-							<p class="title"><span class="tag is-success is-large">+ 51%</span></p>
-						</div>
-					</div>
-				</nav>
-				<div class="box">
-					<div id='map'></div>
-				</div>
-				<div class="box">
-					<canvas id="lineChart"></canvas>
-				</div>
-				<div class="columns is-multiline">
-					<div class="column is-half">
+				<div class="columns">
+					<div class="column is-8">
 						<div class="box">
-							<canvas id="doughnutChart"></canvas>
+							<div id='map'></div>
+						</div>
+						<div class="box">
+							<canvas id="lineChart"></canvas>
+						</div>
+						<div class="columns is-multiline">
+							<div class="column is-half">
+								<div class="box">
+									<canvas id="doughnutChart"></canvas>
+								</div>
+							</div>
+							<div class="column is-half">
+								<div class="box">
+									<canvas id="radarChart"></canvas>
+								</div>
+							</div>
 						</div>
 					</div>
-					<div class="column is-half">
+					<div class="column is-4">
+						<!-- <div class="box">
+							<nav class="level">
+								<div class="level-item has-text-centered">
+									<div>
+										<p class="heading">Total Loads Last Month </p>
+										<p class="title">429,779</p>
+									</div>
+								</div>
+								<div class="level-item has-text-centered">
+									<div>
+										<p class="heading">Month-over-month</p>
+										<p class="title"><span class="tag is-success is-large">+ 33%</span></p>
+									</div>
+								</div>
+								<div class="level-item has-text-centered">
+									<div>
+										<p class="heading">Year-over-year</p>
+										<p class="title"><span class="tag is-success is-large">+ 51%</span></p>
+									</div>
+								</div>
+							</nav>
+						</div> -->
 						<div class="box">
-							<canvas id="radarChart"></canvas>
+							<h2 class="title is-5">Live loads</h2>
+							<p id="test" style="color: #ff9933"></p>
 						</div>
 					</div>
 				</div>
@@ -283,23 +295,58 @@
 </script>
 <script type="text/javascript">
 	var origin = document.getElementById('origin').innerHTML;
-	
+
+	var loads = [];
+	var features = [];
 	//Set default geo to Canada
 	var geoData = { 
-		center: [-106.48, 57.11], 
-		zoom: 3 
-	}
+		center: [-97.48, 55.11], 
+		zoom: 2.5
+	};
+
+	var liveorigin = '';
+
+	var liveload = {
+		"geometry": 
+		{
+			"type": "Point", 
+			"coordinates": [-67.597613198896298, 29.691389732499555]
+		}, 
+		"type": "Feature", 
+		"properties": {}
+	};
 
 	//call function to extract region
-	extractRegion(origin);
+	var region = extractRegion(origin);
+
+	//call function to get coordinate for each region
+	getCoordinate(region);
+
+	//fetch JSON file
+	fetchJSON();
+
+	//fetch the live load
+	fetchLive();
+
+	function fetchLive(){
+		var self = this;
+		axios.get('/live')
+		.then(function (response) {
+			liveorigin = response.data.origin_city;
+			liveload.geometry.coordinates = [response.data.origin_longitude, response.data.origin_latitude];
+		})
+		.catch(function (error) {
+			console.log(error);
+		})
+	}
 
 	//extract region
 	function extractRegion(origin){
 		var splits = origin.split(", ");
-		var region = splits[1];
-		getCoordinate(region);
+		return region = splits[1];
 	}
 
+	//get coordinate for each region
 	function getCoordinate(region){
 		if(region == "ON"){
 			geoData = { 
@@ -326,13 +373,96 @@
 		}
 	}
 
+	function fetchJSON(){
+		var self = this;
+		axios.get('/fetchAllLoads', {
+			params:{
+				origin: region
+			}
+		})
+		.then(function (response) {
+			loads = response.data;
+			toGeoJSON(loads);
+		})
+		.catch(function (error) {
+			console.log(error);
+		})
+	}
+
+	function toGeoJSON(loads){
+		for(var i=0; i<loads.length; i++){
+			features.push({
+				"type": "Feature",
+				"properties": {},
+				"geometry": {
+					"type": "Point",
+					"coordinates": [loads[i].origin_longitude, loads[i].origin_latitude]
+				},
+			})
+		}
+	}
+
+	function updateTest(){
+		$('#test').text(liveorigin);
+	}
+
 	mapboxgl.accessToken = 'pk.eyJ1IjoibGlzaHVveiIsImEiOiJjaW8xdHQzNXIxYWx1dWdseTcxZG1wYzJmIn0.cUxYf1SfN7aEOUJjcjqCXA';
 	var map = new mapboxgl.Map({
-    container: 'map', // container id
-    style: 'mapbox://styles/mapbox/light-v9', //stylesheet location
-    center: geoData.center, // starting position
-    zoom: geoData.zoom // starting zoom
-});
+		container: 'map', 
+		style: 'mapbox://styles/mapbox/light-v9', 
+		center: geoData.center, 
+		zoom: geoData.zoom
+	});
+
+	map.on('load', function () {
+		map.addSource("museums", {
+			"type": "geojson",
+			"data": {
+				"type": "FeatureCollection",
+				"features": features
+			}
+		});
+
+		map.addLayer({
+			'id': 'museums',
+			'type': 'circle',
+			'source': 'museums',
+			'layout': {
+				'visibility': 'visible'
+			},
+			'paint': {
+				'circle-radius': 4,
+				'circle-color': 'rgba(55,148,179,1)'
+			},
+		});
+
+		window.setInterval(function() {
+			fetchLive();
+			updateTest();
+			map.getSource('drone').setData(liveload);
+		}, 2000);
+
+		map.addSource('drone', 
+		{ 
+			"type": 'geojson', 
+			"data": liveload
+		});
+
+		map.addLayer({
+			"id": "drone",
+			"type": "circle",
+			"source": "drone",
+			'layout': {
+				'visibility': 'visible'
+			},
+			'paint': {
+				'circle-radius': 7,
+				'circle-color': 'rgba(255,153,51,1)'
+			},
+		});
+
+	});
+
 
 </script>
 @endsection

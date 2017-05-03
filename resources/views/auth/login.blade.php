@@ -31,7 +31,7 @@
           <div class="field">
             <!-- <label class="label">Email</label> -->
             <p class="control has-icons-left has-icons-right">
-              <input class="input is-medium {{ $errors->has('email') ? ' is-danger' : '' }}" name="email" type="text" placeholder="Email input" required>
+              <input class="input is-medium {{ $errors->has('email') ? ' is-danger' : '' }}" name="email" type="text" placeholder="Email" required>
               <span class="icon is-small is-left">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
               </span>

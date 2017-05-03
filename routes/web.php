@@ -19,12 +19,14 @@ Route::get('/', function (Request $request) {
 });
 
 Route::get('/test', function (Request $request) {
-	dd(Auth::check());
+	return 'test';
 });
+
+Route::get('/live', 'LoadController@live');
 
 // Route::get('/test', 'LoadController@fetch');
 
-// Route::get('/loads', 'LoadController@index');
+Route::get('/fetchAllLoads', 'LoadController@fetchAllLoads');
 
 Route::get('/loads', function(Request $request){
 	return view('loads');
