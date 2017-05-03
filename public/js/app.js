@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 42);
+/******/ 	return __webpack_require__(__webpack_require__.s = 43);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -471,7 +471,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(35)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(36)))
 
 /***/ }),
 /* 2 */
@@ -823,8 +823,11 @@ module.exports = g;
 
 /***/ }),
 /* 9 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mapbox_gl_vue__ = __webpack_require__(35);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -834,7 +837,7 @@ module.exports = g;
 
 __webpack_require__(31);
 
-window.Vue = __webpack_require__(40);
+window.Vue = __webpack_require__(41);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -842,11 +845,18 @@ window.Vue = __webpack_require__(40);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('bl-form', __webpack_require__(36));
-Vue.component('bl-table', __webpack_require__(37));
+Vue.component('bl-form', __webpack_require__(37));
+Vue.component('bl-table', __webpack_require__(38));
+// Vue.component('bl-map', require('./components/Map.vue'));
+
+
 
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  components: {
+    'mapbox': __WEBPACK_IMPORTED_MODULE_0_mapbox_gl_vue__["a" /* default */]
+  }
+
 });
 
 /***/ }),
@@ -31598,10 +31608,334 @@ return jQuery;
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8), __webpack_require__(41)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8), __webpack_require__(42)(module)))
 
 /***/ }),
 /* 35 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+	template: '<div id="map"></div>',
+	data () {
+		return {
+
+		};
+	},
+	props: {
+		accessToken: {
+			type: String,
+			required: true
+		},
+		mapOptions: {
+			type: Object,
+			required: true
+		},
+		navControl: {
+			type: Object,
+			default: () => {
+				return {
+					show: true,
+					position: 'top-right'
+				};
+			}
+		},
+		geolocateControl: {
+			type: Object,
+			default: () => {
+				return {
+					show: false,
+					position: 'top-left',
+					options: {}
+				};
+			}
+		},
+		scaleControl: {
+			type: Object,
+			default: () => {
+				return {
+					show: false,
+					position: 'top-left',
+					options: {}
+				};
+			}
+		},
+		fullscreenControl: {
+			type: Object,
+			default: () => {
+				return {
+					show: false,
+					position: 'top-right'
+				};
+			}
+		}
+	},
+	mounted () {
+		//Initialze Map
+		const map = this.mapInit();
+
+		//Add Controls to map
+		this.addControls(map);
+
+		//Register Map Events
+		this.registerEvents(map);
+	},
+	methods: {
+		mapInit () {
+			//Mapbox GL access token
+			mapboxgl.accessToken = this.accessToken;
+
+			//Add container to options object
+			this.mapOptions.container = 'map';
+
+			//New Mapbox Instance
+			const map = new mapboxgl.Map(this.mapOptions);
+
+			return map;
+		},
+		registerEvents (map) {
+			//Map Loaded
+			map.on('load', () => {
+				this.$emit('map-load', map);
+
+				//Map Mouse Move
+				map.on('mousemove', (e) => {
+					this.$emit('map-mousemove', map, e);
+				});
+
+				//Map Clicked
+				map.on('click', (e) => {
+					this.$emit('map-click', map, e);
+				});
+
+				//Map Context Menu
+				map.on('contextmenu', (e) => {
+					this.$emit('map-contextmenu', map, e);
+				});
+			});
+
+			//Map Resized
+			map.on('resize', () => {
+				this.$emit('map-resize', map);
+			});
+
+			//Map Webgl Context Lost 
+			map.on('resize', (e) => {
+				this.$emit('map-webglcontextlost', map, e);
+			});
+
+			//Map Webgl Context Restored
+			map.on('resize', (e) => {
+				this.$emit('map-webglcontextrestored', map, e);
+			});
+
+			//Map Removed
+			map.on('remove', () => {
+				this.$emit('map-remove', map);
+			});
+
+			//Map Source Data Loading
+			map.on('sourcedataloading', (e) => {
+				this.$emit('map-sourcedataloading', map, e);
+			});
+
+			//Map Touch Start
+			map.on('touchstart', (e) => {
+				this.$emit('map-touchstart', map, e);
+			});
+
+			//Map Move Start
+			map.on('movestart', (e) => {
+				this.$emit('map-movestart', map, e);
+			});
+
+			//Map Touch Move
+			map.on('movestart', (e) => {
+				this.$emit('map-movestart', map, e);
+			});
+
+			//Map Move
+			map.on('move', (e) => {
+				this.$emit('map-move', map, e);
+			});
+
+			//Map Move End
+			map.on('moveend', (e) => {
+				this.$emit('map-moveend', map, e);
+			});
+
+			//Map Error
+			map.on('error', (e) => {
+				this.$emit('map-error', map, e);
+			});
+
+			//Map Data
+			map.on('data', (e) => {
+				this.$emit('map-data', map, e);
+			});
+
+			//Map Style Data
+			map.on('styledata', (e) => {
+				this.$emit('map-styledata', map, e);
+			});
+
+			//Map Mouse Up
+			map.on('mouseup', (e) => {
+				this.$emit('map-mouseup', map, e);
+			});
+
+			//Map Touch Cancel
+			map.on('touchcancel', (e) => {
+				this.$emit('map-touchcancel', map, e);
+			});
+
+			//Map Source Data
+			map.on('sourcedata', (e) => {
+				this.$emit('map-sourcedata', map, e);
+			});
+
+			//Map Data Loading
+			map.on('dataloading', (e) => {
+				this.$emit('map-dataloading', map, e);
+			});
+
+			//Map Style Data Loading
+			map.on('styledataloading', (e) => {
+				this.$emit('map-styledataloading', map, e);
+			});
+
+			//Map Double Click
+			map.on('dblclick', (e) => {
+				this.$emit('map-dblclick', map, e);
+			});
+
+			//Map Render
+			map.on('render', () => {
+				this.$emit('map-render', map);
+			});
+
+			//Map Mouse Out
+			map.on('mouseout', (e) => {
+				this.$emit('map-mouseout', map, e);
+			});
+
+			//Map Mouse Down
+			map.on('mousedown', (e) => {
+				this.$emit('map-mousedown', map, e);
+			});
+
+			//Map Touch End
+			map.on('touchend', (e) => {
+				this.$emit('map-touchend', map, e);
+			});
+
+			//Map Zoom Start
+			map.on('zoomstart', (e) => {
+				this.$emit('map-zoomstart', map, e);
+			});
+
+			//Map Zoom End
+			map.on('zoomend', (e) => {
+				this.$emit('map-zoomend', map, e);
+			});
+
+			//Map Zoom
+			map.on('zoom', (e) => {
+				this.$emit('map-zoom', map, e);
+			});
+
+			//Map Box Zoom Cancel
+			map.on('boxzoomcancel', (e) => {
+				this.$emit('map-boxzoomcancel', map, e);
+			});
+
+			//Map Box Zoom End
+			map.on('boxzoomend', (e) => {
+				this.$emit('map-boxzoomend', map, e);
+			});
+
+			//Map Box Zoom Start
+			map.on('boxzoomstart', (e) => {
+				this.$emit('map-boxzoomstart', map, e);
+			});
+
+			//Map Rotate Start
+			map.on('rotatestart', (e) => {
+				this.$emit('map-rotatestart', map, e);
+			});
+
+			//Map Rotate
+			map.on('rotate', (e) => {
+				this.$emit('map-rotate', map, e);
+			});
+
+			//Map Rotate End
+			map.on('rotateend', (e) => {
+				this.$emit('map-rotateend', map, e);
+			});
+
+			//Map Drag End
+			map.on('dragend', (e) => {
+				this.$emit('map-dragend', map, e);
+			});
+
+			//Map Drag
+			map.on('drag', (e) => {
+				this.$emit('map-drag', map, e);
+			});
+
+			//Map Drag
+			map.on('dragstart', (e) => {
+				this.$emit('map-dragstart', map, e);
+			});
+
+			//Map Pitch
+			map.on('pitch', (e) => {
+				this.$emit('map-pitch', map, e);
+			});
+
+			//Map Pitch Start
+			map.on('pitchstart', (e) => {
+				this.$emit('map-pitchstart', map, e);
+			});
+
+			//Map Pitch End
+			map.on('pitchend', (e) => {
+				this.$emit('map-pitchend', map, e);
+			});
+
+		},
+		addControls (map) {
+			//Nav Control
+			if (this.navControl.show) {
+				const nav = new mapboxgl.NavigationControl();
+				map.addControl(nav, this.navControl.position);
+			}
+
+			//Geolocation Control
+			if (this.geolocateControl.show) {
+				const geolocate = new mapboxgl.GeolocateControl(this.geolocateControl.options);
+				map.addControl(geolocate, this.geolocateControl.position);
+			}
+
+			//Scale Control
+			if (this.scaleControl.show) {
+				const scale = new mapboxgl.ScaleControl(this.scaleControl.options);
+				map.addControl(scale, this.scaleControl.position);
+			}
+
+			//Fullscreen Control
+			if (this.fullscreenControl.show) {
+				const fullscreen = new mapboxgl.FullscreenControl();
+				map.addControl(fullscreen, this.fullscreenControl.position);
+			}
+
+		}
+	},
+});
+
+/***/ }),
+/* 36 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -31791,14 +32125,14 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(7)(
   /* script */
   __webpack_require__(29),
   /* template */
-  __webpack_require__(39),
+  __webpack_require__(40),
   /* scopeId */
   null,
   /* cssModules */
@@ -31825,14 +32159,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(7)(
   /* script */
   __webpack_require__(30),
   /* template */
-  __webpack_require__(38),
+  __webpack_require__(39),
   /* scopeId */
   null,
   /* cssModules */
@@ -31859,7 +32193,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -31888,7 +32222,7 @@ if (false) {
 }
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -31954,7 +32288,7 @@ if (false) {
 }
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41581,7 +41915,7 @@ module.exports = Vue$3;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -41609,7 +41943,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(9);

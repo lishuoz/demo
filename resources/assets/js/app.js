@@ -5,9 +5,9 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+ require('./bootstrap');
 
-window.Vue = require('vue');
+ window.Vue = require('vue');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -15,9 +15,16 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('bl-form', require('./components/Form.vue'));
-Vue.component('bl-table', require('./components/Table.vue'));
+ Vue.component('bl-form', require('./components/Form.vue'));
+ Vue.component('bl-table', require('./components/Table.vue'));
+ // Vue.component('bl-map', require('./components/Map.vue'));
 
-const app = new Vue({
-    el: '#app'
-});
+ import Mapbox from 'mapbox-gl-vue';
+
+ const app = new Vue({
+ 	el: '#app',
+    components: {
+        'mapbox': Mapbox
+    },
+
+ });

@@ -9,9 +9,9 @@
 			</div>
 			<div class="column is-offset-1 is-6">
 				@if(empty($origin))
-				<h1 class="title is-3">Canada</h1>
+				<h1 class="title is-3" id="origin">Canada</h1>
 				@else
-				<h1 class="title is-3">{{$origin}}</h1>
+				<h1 class="title is-3" id="origin">{{$origin}}</h1>
 				@endif
 				<nav class="level">
 					<div class="level-item has-text-centered">
@@ -34,9 +34,12 @@
 					</div>
 				</nav>
 				<div class="box">
+					<div id='map'></div>
+				</div>
+				<div class="box">
 					<canvas id="lineChart"></canvas>
 				</div>
-				<div class="columns">
+				<div class="columns is-multiline">
 					<div class="column is-half">
 						<div class="box">
 							<canvas id="doughnutChart"></canvas>
@@ -276,8 +279,60 @@
 				}
 			}
 		});
-
-
 	})
+</script>
+<script type="text/javascript">
+	var origin = document.getElementById('origin').innerHTML;
+	
+	//Set default geo to Canada
+	var geoData = { 
+		center: [-106.48, 57.11], 
+		zoom: 3 
+	}
+
+	//call function to extract region
+	extractRegion(origin);
+
+	//extract region
+	function extractRegion(origin){
+		var splits = origin.split(", ");
+		var region = splits[1];
+		getCoordinate(region);
+	}
+
+	function getCoordinate(region){
+		if(region == "ON"){
+			geoData = { 
+				center: [-85.224413, 50.789227], 
+				zoom: 3.5
+			}
+		}else if(region == "QC"){
+			geoData = { 
+				center: [-72.294306, 53.103077], 
+				zoom: 3.5
+			}
+		}else if(region == "BC" || region == "AB" || region == "SK" || region == "MB" || region == "YT" || region == "NT" || region == "NU"){
+			geoData = { 
+				center: [-110.892739, 55.731258], 
+				zoom: 3.5
+			}
+		}else if(region == "NB" || region == "NS" || region == "PE" || region == "NL"){
+			geoData = { 
+				center: [-60.968481, 49.778463], 
+				zoom: 4
+			}
+		}else{
+			return;
+		}
+	}
+
+	mapboxgl.accessToken = 'pk.eyJ1IjoibGlzaHVveiIsImEiOiJjaW8xdHQzNXIxYWx1dWdseTcxZG1wYzJmIn0.cUxYf1SfN7aEOUJjcjqCXA';
+	var map = new mapboxgl.Map({
+    container: 'map', // container id
+    style: 'mapbox://styles/mapbox/light-v9', //stylesheet location
+    center: geoData.center, // starting position
+    zoom: geoData.zoom // starting zoom
+});
+
 </script>
 @endsection
