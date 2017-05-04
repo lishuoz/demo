@@ -6,7 +6,7 @@
 					<div class="field-body">
 						<div class="field is-grouped">
 							<p class="control is-expanded">
-								<input class="input is-medium" id="autoOrigin" type="text" placeholder="Origin" name="origin" required>
+								<input class="input is-medium" id="autoOrigin" type="text" placeholder="Origin" name="origin" required autofocus>
 							</p>
 						</div>
 						<div class="field">

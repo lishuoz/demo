@@ -7,6 +7,7 @@
 
  require('./bootstrap');
 
+
  window.Vue = require('vue');
 
 /**
@@ -17,14 +18,14 @@
 
  Vue.component('bl-form', require('./components/Form.vue'));
  Vue.component('bl-table', require('./components/Table.vue'));
- // Vue.component('bl-map', require('./components/Map.vue'));
+ Vue.component('bl-menu', require('./components/Menu.vue'));
 
  import Mapbox from 'mapbox-gl-vue';
 
  const app = new Vue({
  	el: '#app',
-    components: {
-        'mapbox': Mapbox
-    },
+ 	components: {
+ 		'mapbox': Mapbox
+ 	},
 
  });

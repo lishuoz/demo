@@ -9,7 +9,7 @@
 	<div class="container">
 		<div class="columns">
 			<div class="column is-2">
-				@include('layouts.sidebar')
+				<bl-menu default-item="loads"></bl-menu>
 			</div>
 			<div class="column is-10">
 				<h1 class="title is-3">Search Your Loads</h1>

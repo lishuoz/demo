@@ -24,8 +24,6 @@ Route::get('/test', function (Request $request) {
 
 Route::get('/live', 'LoadController@live');
 
-// Route::get('/test', 'LoadController@fetch');
-
 Route::get('/fetchAllLoads', 'LoadController@fetchAllLoads');
 
 Route::get('/loads', function(Request $request){
@@ -33,9 +31,6 @@ Route::get('/loads', function(Request $request){
 });
 
 Route::get('/fetch', 'LoadController@fetch');
-
-// Route::get('/testfetch', 'LoadController@index');
-
 
 Auth::routes();
 

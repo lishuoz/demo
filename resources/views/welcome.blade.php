@@ -5,7 +5,7 @@
 	<div class="container">
 		<div class="columns">
 			<div class="column is-2">
-				@include('layouts.sidebar')
+				<bl-menu default-item="home"></bl-menu>
 			</div>
 			<div class="column is-10">
 				@if(empty($origin))
@@ -27,6 +27,37 @@
 							<h2 class="title is-5">Live loads</h2>
 							<ul id="liveloads">
 							</ul>
+							<a href="/loads" class="button is-primary is-fullwidth">Find More Loads</a>
+						</div>
+						<div class="box">
+							<h2 class="title is-5">Hot Lanes</h2>
+							<table class="table">
+								<thead>
+									<tr>
+										<th><abbr title="Origin">ORG</abbr></th>
+										<th><abbr title="Destination">DEST</abbr></th>
+										<th>Ratio</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Eastern Canada</td>
+										<td>Ontario</td>
+										<td><abbr title="Less Than 1 Truck for Every Load">< 1.0</abbr></td>
+									</tr>
+									<tr>
+										<td>Central Canada</td>
+										<td>Ontario</td>
+										<td><abbr title="Less Than 2 Trucks for Every Load">< 2.0</abbr></td>
+									</tr>
+									<tr>
+										<td>Ontario</td>
+										<td>Central Canada</td>
+										<td><abbr title="2.5 Trucks for Every Load">2.5</abbr></td>
+									</tr>
+								</tbody>
+							</table>
+							<a href="/loads" class="button is-primary is-fullwidth">Check My Lane</a>
 						</div>
 						<div class="box">
 							<canvas id="doughnutChart"></canvas>
@@ -43,229 +74,7 @@
 @endsection
 
 @section('script-footer')
-<script type="text/javascript">
-	$(document).ready(function(){
-		// Line Chart and Data
-		var lineChart = document.getElementById("lineChart");
-		var lineChartData = {
-			labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "Octobor", "Novemver", "December"],
-			datasets: [
-			{
-				label: "2012",
-				fill: false,
-				lineTension: 0.1,
-				backgroundColor: "rgba(175,198,226,0.4)",
-				borderColor: "rgba(175,198,226,1)",
-				borderCapStyle: 'butt',
-				borderDash: [],
-				borderDashOffset: 0.0,
-				borderJoinStyle: 'miter',
-				pointBorderColor: "rgba(175,198,226,1)",
-				pointBackgroundColor: "#fff",
-				pointBorderWidth: 1,
-				pointHoverRadius: 5,
-				pointHoverBackgroundColor: "rgba(175,198,226,1)",
-				pointHoverBorderColor: "rgba(220,220,220,1)",
-				pointHoverBorderWidth: 2,
-				pointRadius: 1,
-				pointHitRadius: 10,
-				data: [220, 222, 276, 266, 301, 295, 233, 235, 200, 215, 215, 182],
-				spanGaps: false,
-			},
-			{
-				label: "2013",
-				fill: false,
-				lineTension: 0.1,
-				backgroundColor: "rgba(74,137,220,0.4)",
-				borderColor: "rgba(74,137,220,1)",
-				borderCapStyle: 'butt',
-				borderDash: [],
-				borderDashOffset: 0.0,
-				borderJoinStyle: 'miter',
-				pointBorderColor: "rgba(74,137,220,1)",
-				pointBackgroundColor: "#fff",
-				pointBorderWidth: 1,
-				pointHoverRadius: 5,
-				pointHoverBackgroundColor: "rgba(74,137,220,1)",
-				pointHoverBorderColor: "rgba(220,220,220,1)",
-				pointHoverBorderWidth: 2,
-				pointRadius: 1,
-				pointHitRadius: 10,
-				data: [228, 198, 245, 229, 252, 234, 233, 229, 218, 232, 210, 234],
-				spanGaps: false,
-			},
-			{
-				label: "2014",
-				fill: false,
-				lineTension: 0.1,
-				backgroundColor: "rgba(243,156,18,0.4)",
-				borderColor: "rgba(243,156,18,1)",
-				borderCapStyle: 'butt',
-				borderDash: [],
-				borderDashOffset: 0.0,
-				borderJoinStyle: 'miter',
-				pointBorderColor: "rgba(243,156,18,1)",
-				pointBackgroundColor: "#fff",
-				pointBorderWidth: 1,
-				pointHoverRadius: 5,
-				pointHoverBackgroundColor: "rgba(243,156,18,1)",
-				pointHoverBorderColor: "rgba(220,220,220,1)",
-				pointHoverBorderWidth: 2,
-				pointRadius: 1,
-				pointHitRadius: 10,
-				data: [335, 318, 369, 324, 331, 331, 291, 264, 279, 282, 251, 278],
-				spanGaps: false,
-			},
-			{
-				label: "2015",
-				fill: false,
-				lineTension: 0.1,
-				backgroundColor: "rgba(192,57,43,0.4)",
-				borderColor: "rgba(192,57,43,1)",
-				borderCapStyle: 'butt',
-				borderDash: [],
-				borderDashOffset: 0.0,
-				borderJoinStyle: 'miter',
-				pointBorderColor: "rgba(192,57,43,1)",
-				pointBackgroundColor: "#fff",
-				pointBorderWidth: 1,
-				pointHoverRadius: 5,
-				pointHoverBackgroundColor: "rgba(192,57,43,1)",
-				pointHoverBorderColor: "rgba(220,220,220,1)",
-				pointHoverBorderWidth: 2,
-				pointRadius: 1,
-				pointHitRadius: 10,
-				data: [275, 253, 285, 249, 258, 263, 197, 196, 210, 197, 182, 178],
-				spanGaps: false,
-			},
-			{
-				label: "2016",
-				fill: false,
-				lineTension: 0.1,
-				backgroundColor: "rgba(137,165,78,0.4)",
-				borderColor: "rgba(137,165,78,1)",
-				borderCapStyle: 'butt',
-				borderDash: [],
-				borderDashOffset: 0.0,
-				borderJoinStyle: 'miter',
-				pointBorderColor: "rgba(137,165,78,1)",
-				pointBackgroundColor: "#fff",
-				pointBorderWidth: 1,
-				pointHoverRadius: 5,
-				pointHoverBackgroundColor: "rgba(137,165,78,1)",
-				pointHoverBorderColor: "rgba(220,220,220,1)",
-				pointHoverBorderWidth: 2,
-				pointRadius: 1,
-				pointHitRadius: 10,
-				data: [199, 201, 236, 207, 252, 247, 197, 220, 231, 213, 226, 258],
-				spanGaps: false,
-			},
-			{
-				label: "2017",
-				fill: false,
-				lineTension: 0.1,
-				backgroundColor: "rgba(80,227,194,0.4)",
-				borderColor: "rgba(80,227,194,1)",
-				borderCapStyle: 'butt',
-				borderDash: [],
-				borderDashOffset: 0.0,
-				borderJoinStyle: 'miter',
-				pointBorderColor: "rgba(80,227,194,1)",
-				pointBackgroundColor: "#fff",
-				pointBorderWidth: 1,
-				pointHoverRadius: 5,
-				pointHoverBackgroundColor: "rgba(80,227,194,1)",
-				pointHoverBorderColor: "rgba(220,220,220,1)",
-				pointHoverBorderWidth: 2,
-				pointRadius: 1,
-				pointHitRadius: 10,
-				data: [284, 269, 357],
-				spanGaps: false,
-			}
-			]
-		};
-		var myLineChart = new Chart(lineChart, {
-			type: 'line',
-			data: lineChartData,
-			options: {
-				title: {
-					display: true,
-					text: 'Canadian Spot Market Freight Index 2012-2016'
-				}
-			}
-		});
-
-		var doughnutChart = document.getElementById("doughnutChart");
-		var doughnutChartData = {
-			labels: [
-			"Cross-border Loads",
-			"Intra-Canada Loads",
-			"Other"
-			],
-			datasets: [
-			{
-				data: [71, 27, 2],
-				backgroundColor: [
-				"#0079A7",
-				"#00AAE9",
-				"#7ED3F3"
-				],
-				hoverBackgroundColor: [
-				"#0079A7",
-				"#00AAE9",
-				"#7ED3F3"
-				]
-			}]
-		};
-		var myDoughnutChart = new Chart(doughnutChart, {
-			type: 'doughnut',
-			data: doughnutChartData,
-			options: {
-				title: {
-					display: true,
-					text: 'March 2017 Loads Volumns'
-				}
-			}
-		});
-
-		var radarChart = document.getElementById("radarChart");
-		var radarChartData = {
-			labels: ["Western", "Ontario", "Quebec", "Atlantic"],
-			datasets: [
-			{
-				label: "By Region of Origin ",
-				backgroundColor: "rgba(179,181,198,0.2)",
-				borderColor: "rgba(179,181,198,1)",
-				pointBackgroundColor: "rgba(179,181,198,1)",
-				pointBorderColor: "#fff",
-				pointHoverBackgroundColor: "#fff",
-				pointHoverBorderColor: "rgba(179,181,198,1)",
-				data: [42, 35, 18, 5]
-			},
-			{
-				label: "By Region of Destination",
-				backgroundColor: "rgba(255,99,132,0.2)",
-				borderColor: "rgba(255,99,132,1)",
-				pointBackgroundColor: "rgba(255,99,132,1)",
-				pointBorderColor: "#fff",
-				pointHoverBackgroundColor: "#fff",
-				pointHoverBorderColor: "rgba(255,99,132,1)",
-				data: [35, 33, 27, 5]
-			}
-			]
-		};
-		var myRadarChart = new Chart(radarChart, {
-			type: "radar",
-			data: radarChartData,
-			options: {
-				title: {
-					display: true,
-					text: 'March 2017 Loads within Canada Distribution'
-				}
-			}
-		});
-	})
-</script>
+<script src="{{ asset('/js/data-charts.js') }}"></script>
 <script type="text/javascript">
 	var origin = document.getElementById('origin').innerHTML;
 
@@ -292,7 +101,9 @@
 		container: 'map', 
 		style: 'mapbox://styles/mapbox/light-v9', 
 		center: geoData.center, 
-		zoom: geoData.zoom
+		zoom: geoData.zoom,
+		maxZoom: 7,
+		minZoom: 2.5
 	});
 
 	var liveload = {
@@ -322,7 +133,7 @@
 			}
 		}else if(region == "QC"){
 			geoData = { 
-				center: [-72.294306, 53.103077], 
+				center: [-72.294306, 47.103077], 
 				zoom: 3.5
 			}
 		}else if(region == "BC" || region == "AB" || region == "SK" || region == "MB" || region == "YT" || region == "NT" || region == "NU"){
@@ -382,7 +193,6 @@
 	}
 
 	function renderTable(liveloads){
-		console.log(liveloads);
 		$("#liveloads").empty();
 		var list = "";
 		for(var i=0; i<liveloads.length; i++){
@@ -450,7 +260,7 @@
 				},
 				'paint': {
 					'circle-radius': 4,
-					'circle-color': 'rgba(55,148,179,1)'
+					'circle-color': 'rgba(0,84,158, 1)'
 				},
 			});
 
@@ -471,13 +281,7 @@
 					'circle-color': 'rgba(255,153,51,1)'
 				},
 			});
-
-
 		});
-	}
-
-	function showLiveData(liveload){
-		
 	}
 </script>
 @endsection
