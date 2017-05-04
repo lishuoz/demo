@@ -21,6 +21,12 @@
     #map { 
       height: 400px; 
     }
+    #liveloads > :first-child{
+      color: #FF9933;
+    }
+    #liveloads *{
+      margin: 10px auto;
+    }
 
   </style>
   <!-- Scripts -->
@@ -43,21 +49,50 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 
-    <script>
-      function initAutocomplete() {
-       var options = {
-        types: ['(cities)'],
-        componentRestrictions: {country: "ca"}
+    <!-- Live Chat Scripts -->
+    <script type="text/javascript">
+      (function () {
+        var head = document.getElementsByTagName("head").item(0);
+        var script = document.createElement("script");
+        
+        var src = (document.location.protocol == 'https:' 
+          ? 'https://www.formilla.com/scripts/feedback.js' 
+          : 'http://www.formilla.com/scripts/feedback.js');
+        
+        script.setAttribute("type", "text/javascript"); 
+        script.setAttribute("src", src); script.setAttribute("async", true);        
+
+        var complete = false;
+        
+        script.onload = script.onreadystatechange = function () {
+          if (!complete && (!this.readyState 
+            || this.readyState == 'loaded' 
+            || this.readyState == 'complete')) {
+            complete = true;
+          Formilla.guid = 'csbdbbd8-d342-4823-a1ed-3cb1f93bd405';
+          Formilla.loadWidgets();                
+        }
       };
 
-      var inputOrigin = document.getElementById('autoOrigin');
-      var autoOrigin = new google.maps.places.Autocomplete(inputOrigin, options);
-      var inputDestination = document.getElementById('autoDestination');
-      var autoDestination = new google.maps.places.Autocomplete(inputDestination, options);
-    }
-
+      head.appendChild(script);
+    })();
   </script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNHgtcSe8bnt6Z4zBuZjgovVqsa5F_WN0&libraries=places&callback=initAutocomplete" async defer></script>
-  @yield('script-footer')
+
+  <!-- Google AutoComplete Scripts -->
+  <script>
+    function initAutocomplete() {
+     var options = {
+      types: ['(cities)'],
+      componentRestrictions: {country: "ca"}
+    };
+
+    var inputOrigin = document.getElementById('autoOrigin');
+    var autoOrigin = new google.maps.places.Autocomplete(inputOrigin, options);
+    var inputDestination = document.getElementById('autoDestination');
+    var autoDestination = new google.maps.places.Autocomplete(inputDestination, options);
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNHgtcSe8bnt6Z4zBuZjgovVqsa5F_WN0&libraries=places&callback=initAutocomplete" async defer></script>
+@yield('script-footer')
 </body>
 </html>

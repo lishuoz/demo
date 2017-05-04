@@ -21,45 +21,18 @@
 						<div class="box">
 							<canvas id="lineChart"></canvas>
 						</div>
-						<div class="columns is-multiline">
-							<div class="column is-half">
-								<div class="box">
-									<canvas id="doughnutChart"></canvas>
-								</div>
-							</div>
-							<div class="column is-half">
-								<div class="box">
-									<canvas id="radarChart"></canvas>
-								</div>
-							</div>
-						</div>
 					</div>
 					<div class="column is-4">
-						<!-- <div class="box">
-							<nav class="level">
-								<div class="level-item has-text-centered">
-									<div>
-										<p class="heading">Total Loads Last Month </p>
-										<p class="title">429,779</p>
-									</div>
-								</div>
-								<div class="level-item has-text-centered">
-									<div>
-										<p class="heading">Month-over-month</p>
-										<p class="title"><span class="tag is-success is-large">+ 33%</span></p>
-									</div>
-								</div>
-								<div class="level-item has-text-centered">
-									<div>
-										<p class="heading">Year-over-year</p>
-										<p class="title"><span class="tag is-success is-large">+ 51%</span></p>
-									</div>
-								</div>
-							</nav>
-						</div> -->
 						<div class="box">
 							<h2 class="title is-5">Live loads</h2>
-							<p id="test" style="color: #ff9933"></p>
+							<ul id="liveloads">
+							</ul>
+						</div>
+						<div class="box">
+							<canvas id="doughnutChart"></canvas>
+						</div>
+						<div class="box">
+							<canvas id="radarChart"></canvas>
 						</div>
 					</div>
 				</div>
@@ -296,8 +269,12 @@
 <script type="text/javascript">
 	var origin = document.getElementById('origin').innerHTML;
 
-	var loads = [];
 	var features = [];
+	var liveloads = [];
+
+	//call function to extract region
+	var region = extractRegion(origin);
+
 	//Set default geo to Canada
 	var geoData = { 
 		center: [-97.48, 55.11], 
@@ -306,39 +283,29 @@
 
 	var liveorigin = '';
 
+	//call function to get coordinate for each region
+	getCoordinate(region);
+
+	mapboxgl.accessToken = 'pk.eyJ1IjoibGlzaHVveiIsImEiOiJjaW8xdHQzNXIxYWx1dWdseTcxZG1wYzJmIn0.cUxYf1SfN7aEOUJjcjqCXA';
+
+	var map = new mapboxgl.Map({
+		container: 'map', 
+		style: 'mapbox://styles/mapbox/light-v9', 
+		center: geoData.center, 
+		zoom: geoData.zoom
+	});
+
 	var liveload = {
 		"geometry": 
 		{
 			"type": "Point", 
-			"coordinates": [-67.597613198896298, 29.691389732499555]
+			"coordinates": [,]
 		}, 
 		"type": "Feature", 
-		"properties": {}
 	};
-
-	//call function to extract region
-	var region = extractRegion(origin);
-
-	//call function to get coordinate for each region
-	getCoordinate(region);
 
 	//fetch JSON file
 	fetchJSON();
-
-	//fetch the live load
-	fetchLive();
-
-	function fetchLive(){
-		var self = this;
-		axios.get('/live')
-		.then(function (response) {
-			liveorigin = response.data.origin_city;
-			liveload.geometry.coordinates = [response.data.origin_longitude, response.data.origin_latitude];
-		})
-		.catch(function (error) {
-			console.log(error);
-		})
-	}
 
 	//extract region
 	function extractRegion(origin){
@@ -374,6 +341,7 @@
 	}
 
 	function fetchJSON(){
+
 		var self = this;
 		axios.get('/fetchAllLoads', {
 			params:{
@@ -381,15 +349,50 @@
 			}
 		})
 		.then(function (response) {
-			loads = response.data;
-			toGeoJSON(loads);
+
+			var loads = response.data;
+			var liveloads = loads.slice(0, 5);
+			var features = toGeoJSON(loads);
+			loadMapData(features);
+			renderTable(liveloads);
+			// every two second get a live load
+			window.setInterval(function(){
+				var liveload = {
+					"geometry": 
+					{
+						"type": "Point", 
+						"coordinates": [-67.597613198896298, 29.691389732499555]
+					}, 
+					"type": "Feature", 
+					"origin_city" : "",
+					"origin_province" : "",
+					"destination_city" : "",
+					"destination_province" : "",
+				};
+				getLiveLoad(loads, liveload);
+				updateTable(liveloads, liveload);
+				// updateMap(liveload, map);
+				map.getSource('drone').setData(liveload);
+
+			}, 3500);
 		})
 		.catch(function (error) {
 			console.log(error);
 		})
 	}
 
+	function renderTable(liveloads){
+		console.log(liveloads);
+		$("#liveloads").empty();
+		var list = "";
+		for(var i=0; i<liveloads.length; i++){
+			list +="<li>"+liveloads[i].origin_city+", "+liveloads[i].origin_province+"-> "+liveloads[i].destination_city+", "+liveloads[i].destination_province+"</li>";
+		}
+		$("#liveloads").append(list);
+	}
+
 	function toGeoJSON(loads){
+		var features = [];
 		for(var i=0; i<loads.length; i++){
 			features.push({
 				"type": "Feature",
@@ -400,69 +403,81 @@
 				},
 			})
 		}
+		return features;
 	}
 
-	function updateTest(){
-		$('#test').text(liveorigin);
+	function getLiveLoad(loads, liveload){
+		var random = getRandomInt(0, loads.length);
+		liveload.geometry.coordinates = [loads[random].origin_longitude, loads[random].origin_latitude];
+		liveload.origin_city = loads[random].origin_city;
+		liveload.origin_province = loads[random].origin_province;
+		liveload.destination_city = loads[random].destination_city;
+		liveload.destination_province = loads[random].destination_province;
 	}
 
-	mapboxgl.accessToken = 'pk.eyJ1IjoibGlzaHVveiIsImEiOiJjaW8xdHQzNXIxYWx1dWdseTcxZG1wYzJmIn0.cUxYf1SfN7aEOUJjcjqCXA';
-	var map = new mapboxgl.Map({
-		container: 'map', 
-		style: 'mapbox://styles/mapbox/light-v9', 
-		center: geoData.center, 
-		zoom: geoData.zoom
-	});
+	function updateMap(liveload, map){
+		showLiveData;
+	}
 
-	map.on('load', function () {
-		map.addSource("museums", {
-			"type": "geojson",
-			"data": {
-				"type": "FeatureCollection",
-				"features": features
-			}
+	function updateTable(liveloads, liveload){
+		liveloads.unshift(liveload);
+		liveloads.pop();
+		renderTable(liveloads);
+	}
+
+	function getRandomInt(min, max) {
+		min = Math.ceil(min);
+		max = Math.floor(max);
+		return Math.floor(Math.random() * (max - min)) + min;
+	}
+
+	function loadMapData(features){
+		map.on('load', function () {
+			map.addSource("museums", {
+				"type": "geojson",
+				"data": {
+					"type": "FeatureCollection",
+					"features": features
+				}
+			});
+
+			map.addLayer({
+				'id': 'museums',
+				'type': 'circle',
+				'source': 'museums',
+				'layout': {
+					'visibility': 'visible'
+				},
+				'paint': {
+					'circle-radius': 4,
+					'circle-color': 'rgba(55,148,179,1)'
+				},
+			});
+
+			map.addSource('drone', 
+			{ 
+				"type": 'geojson', 
+				"data": liveload,
+			});
+			map.addLayer({
+				"id": "drone",
+				"type": "circle",
+				"source": "drone",
+				'layout': {
+					'visibility': 'visible'
+				},
+				'paint': {
+					'circle-radius': 7,
+					'circle-color': 'rgba(255,153,51,1)'
+				},
+			});
+
+
 		});
+	}
 
-		map.addLayer({
-			'id': 'museums',
-			'type': 'circle',
-			'source': 'museums',
-			'layout': {
-				'visibility': 'visible'
-			},
-			'paint': {
-				'circle-radius': 4,
-				'circle-color': 'rgba(55,148,179,1)'
-			},
-		});
-
-		window.setInterval(function() {
-			fetchLive();
-			updateTest();
-			map.getSource('drone').setData(liveload);
-		}, 2000);
-
-		map.addSource('drone', 
-		{ 
-			"type": 'geojson', 
-			"data": liveload
-		});
-
-		map.addLayer({
-			"id": "drone",
-			"type": "circle",
-			"source": "drone",
-			'layout': {
-				'visibility': 'visible'
-			},
-			'paint': {
-				'circle-radius': 7,
-				'circle-color': 'rgba(255,153,51,1)'
-			},
-		});
-
-	});
-
-
+	function showLiveData(liveload){
+		
+	}
 </script>
 @endsection
