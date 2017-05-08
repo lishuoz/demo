@@ -16,7 +16,6 @@ class LocationController extends Controller
 			$origin = $request->session()->get('origin');
 		}
 
-		dd($request->ip);
 		// Get GEO Location of the user
 		$location = \Location::get($request->ip);
 
