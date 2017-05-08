@@ -21,7 +21,6 @@
 		</div>
 		<div class="block">
 			<bl-loadlist :loads="loads" :auth="auth"></bl-loadlist>
-			<!-- <bl-table :loads="loads" :auth="auth"></bl-table> -->
 		</div>
 	</div>
 </template>
