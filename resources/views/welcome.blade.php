@@ -8,8 +8,8 @@
 				<bl-menu default-item="home"></bl-menu>
 			</div>
 			<div class="column is-10">
-				<!-- <bl-header origin="{{$origin}}"></bl-header> -->
-				<h1 id="origin">Toronto, ON, Canada</h1>
+				<bl-header origin="{{$origin}}"></bl-header>
+				<!-- <h1 id="origin">Toronto, ON, Canada</h1> -->
 				<div class="columns">
 					<div class="column is-8">
 						<div class="box">
@@ -165,10 +165,11 @@
 @section('script-footer')
 <script src="{{ asset('/js/data-charts.js') }}"></script>
 <script type="text/javascript">
-	var origin = document.getElementById('origin').innerHTML;
+	$(document).ready(function(){
+		var origin = document.getElementById('origin').innerHTML;
 
-	var features = [];
-	var liveloads = [];
+		var features = [];
+		var liveloads = [];
 
 	//call function to extract region
 	var region = extractRegion(origin);
@@ -372,5 +373,6 @@
 			});
 		});
 	}
+});
 </script>
 @endsection
