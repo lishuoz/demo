@@ -8,13 +8,7 @@
 				<bl-menu default-item="home"></bl-menu>
 			</div>
 			<div class="column is-10">
-				<!-- <bl-header :origin="origin"></bl-header> -->
-				@if(empty($origin))
-				<h1 class="title is-3" id="origin">Canada</h1>
-				@else
 				<bl-header origin="{{$origin}}"></bl-header>
-				<!-- <h1 class="title is-3" id="origin">{{$origin}}</h1> -->
-				@endif
 				<div class="columns">
 					<div class="column is-8">
 						<div class="box">

@@ -13,14 +13,14 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', function (Request $request) {
-	$origin = $request->origin;
-	return view('welcome')->with('origin', $origin);
-});
+Route::get('/', 'LocationController@welcome');
 
 Route::get('/test', function (Request $request) {
-	return 'test';
+	$ip = $request->ip;
+	$data = Location::get($ip);
+	dd($data);
 });
+
 Route::get('/testview', function (Request $request) {
 	return view('test');
 });
