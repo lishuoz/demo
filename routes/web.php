@@ -21,6 +21,9 @@ Route::get('/', function (Request $request) {
 Route::get('/test', function (Request $request) {
 	return 'test';
 });
+Route::get('/testview', function (Request $request) {
+	return view('test');
+});
 
 Route::get('/live', 'LoadController@live');
 
@@ -28,6 +31,10 @@ Route::get('/fetchAllLoads', 'LoadController@fetchAllLoads');
 
 Route::get('/loads', function(Request $request){
 	return view('loads');
+});
+
+Route::get('/rates', function(Request $request){
+	return view('rates');
 });
 
 Route::get('/fetch', 'LoadController@fetch');

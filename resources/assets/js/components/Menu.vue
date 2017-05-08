@@ -13,7 +13,7 @@
     </p>
     <ul class="menu-list">
       <li><a href="/loads" :class="{'is-active' : isActive('loads')}">Load Board</a></li>
-      <li><a>Spot Rate</a></li>
+      <li><a href="/rates" :class="{'is-active' : isActive('rates')}">Spot Rate</a></li>
       <li><a>Truck Load Ratio</a></li>
       <li><a>Dispatch</a></li>
     </ul>
@@ -44,8 +44,5 @@
         this.activeItem = menuItem
       }
     },
-    mounted() {
-      console.log('Component mounted.')
-    }
   }
 </script>

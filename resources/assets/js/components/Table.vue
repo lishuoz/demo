@@ -46,8 +46,5 @@
                 // loads: this.proploads
             }
         },
-        mounted() {
-            console.log(this.auth == 1);
-        },
     }
 </script>

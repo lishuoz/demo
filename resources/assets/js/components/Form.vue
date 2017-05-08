@@ -20,7 +20,8 @@
 			</form>
 		</div>
 		<div class="block">
-			<bl-table :loads="loads" :auth="auth"></bl-table>
+			<bl-loadlist :loads="loads" :auth="auth"></bl-loadlist>
+			<!-- <bl-table :loads="loads" :auth="auth"></bl-table> -->
 		</div>
 	</div>
 </template>
@@ -28,7 +29,8 @@
 <script>
 	export default {
 		mounted() {
-			console.log('Component mounted.')
+			// document.getElementById('autoOrigin').value = this.getParameterByName('origin');
+			// document.getElementById('autoDestination').value = this.getParameterByName('destination');
 		},
 		data(){
 			return {
@@ -54,7 +56,16 @@
 				.catch(function (error) {
 					console.log(error);
 				})
-			}
+			},
+			// getParameterByName(name, url) {
+			// 	if (!url) url = window.location.href;
+			// 	name = name.replace(/[\[\]]/g, "\\$&");
+			// 	var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+			// 	results = regex.exec(url);
+			// 	if (!results) return null;
+			// 	if (!results[2]) return '';
+			// 	return decodeURIComponent(results[2].replace(/\+/g, " "));
+			// }
 		}
 	}
 </script>

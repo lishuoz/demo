@@ -8,10 +8,12 @@
 				<bl-menu default-item="home"></bl-menu>
 			</div>
 			<div class="column is-10">
+				<!-- <bl-header :origin="origin"></bl-header> -->
 				@if(empty($origin))
 				<h1 class="title is-3" id="origin">Canada</h1>
 				@else
-				<h1 class="title is-3" id="origin">{{$origin}}</h1>
+				<bl-header origin="{{$origin}}"></bl-header>
+				<!-- <h1 class="title is-3" id="origin">{{$origin}}</h1> -->
 				@endif
 				<div class="columns">
 					<div class="column is-8">
@@ -19,46 +21,138 @@
 							<div id='map'></div>
 						</div>
 						<div class="box">
+							<h2 class="title is-5"><strong>March 2017 Top Active Lanes</strong></h2>
+							<div class="columns">
+								<div class="column is-half">
+									<h3 class="title is-6 has-text-centered">Domestic</h3>
+									<table class="table">
+										<thead>
+											<tr>
+												<th>Origin</th>
+												<th>Destination</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>Montreal, QC</td>
+												<td>Toronto, ON</td>
+											</tr>
+											<tr>
+												<td>Montreal, QC</td>
+												<td>Mississauga, ON</td>
+											</tr>
+											<tr>
+												<td>Toronto, ON</td>
+												<td>Montreal, QC</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="column is-half">
+									<h3 class="title is-6 has-text-centered">Cross Border</h3>
+									<table class="table">
+										<thead>
+											<tr>
+												<th>Origin</th>
+												<th>Destination</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>Laredo, TX</td>
+												<td>Toronto, ON</td>
+											</tr>
+											<tr>
+												<td>Chicago, IL</td>
+												<td>Toronto, ON</td>
+											</tr>
+											<tr>
+												<td>Mcallen, TX</td>
+												<td>Toronto, ON</td>
+											</tr>
+										</tbody>
+									</table>
+									<a href="/loads" class="button is-primary is-fullwidth">Check My Lane</a>
+								</div>
+							</div>
+							
+						</div>
+						<div class="box">
+							<h2 class="title is-5"><strong>March 2017 Top Active Lanes</strong></h2>
+							<div class="columns">
+								<div class="column is-half">
+									<h3 class="title is-6 has-text-centered">Domestic</h3>
+									<table class="table">
+										<thead>
+											<tr>
+												<th>Origin</th>
+												<th>Destination</th>
+												<th>$ Per Mile</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>Regina</td>
+												<td>Toronto</td>
+												<td><strong>2.24</strong></td>
+											</tr>
+											<tr>
+												<td>Toronto</td>
+												<td>Regina</td>
+												<td><strong>2.75</strong></td>
+											</tr>
+											<tr>
+												<td>Moncton</td>
+												<td>Halifax</td>
+												<td><strong>3.51</strong></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="column is-half">
+									<h3 class="title is-6 has-text-centered">Cross Border</h3>
+									<table class="table">
+										<thead>
+											<tr>
+												<th>Origin</th>
+												<th>Destination</th>
+												<th>$ Per Mile</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>Seattle</td>
+												<td>Calgary</td>
+												<td><strong>3.16</strong></td>
+											</tr>
+											<tr>
+												<td>Atlanta</td>
+												<td>London</td>
+												<td><strong>2.70</strong></td>
+											</tr>
+											<tr>
+												<td>Houston</td>
+												<td>London</td>
+												<td><strong>2.06</strong></td>
+											</tr>
+										</tbody>
+									</table>
+									<a href="/loads" class="button is-primary is-fullwidth">Check My Lane</a>
+								</div>
+							</div>
+						</div>
+						<div class="box">
 							<canvas id="lineChart"></canvas>
 						</div>
 					</div>
 					<div class="column is-4">
 						<div class="box">
-							<h2 class="title is-5">Live loads</h2>
+							<h2 class="title is-5"><strong>Live loads</strong></h2>
 							<ul id="liveloads">
 							</ul>
 							<a href="/loads" class="button is-primary is-fullwidth">Find More Loads</a>
 						</div>
-						<div class="box">
-							<h2 class="title is-5">Hot Lanes</h2>
-							<table class="table">
-								<thead>
-									<tr>
-										<th><abbr title="Origin">ORG</abbr></th>
-										<th><abbr title="Destination">DEST</abbr></th>
-										<th>Ratio</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>Eastern Canada</td>
-										<td>Ontario</td>
-										<td><abbr title="Less Than 1 Truck for Every Load">< 1.0</abbr></td>
-									</tr>
-									<tr>
-										<td>Central Canada</td>
-										<td>Ontario</td>
-										<td><abbr title="Less Than 2 Trucks for Every Load">< 2.0</abbr></td>
-									</tr>
-									<tr>
-										<td>Ontario</td>
-										<td>Central Canada</td>
-										<td><abbr title="2.5 Trucks for Every Load">2.5</abbr></td>
-									</tr>
-								</tbody>
-							</table>
-							<a href="/loads" class="button is-primary is-fullwidth">Check My Lane</a>
-						</div>
+						
 						<div class="box">
 							<canvas id="doughnutChart"></canvas>
 						</div>
@@ -102,7 +196,7 @@
 		style: 'mapbox://styles/mapbox/light-v9', 
 		center: geoData.center, 
 		zoom: geoData.zoom,
-		maxZoom: 7,
+		maxZoom: 5,
 		minZoom: 2.5
 	});
 
@@ -162,7 +256,7 @@
 		.then(function (response) {
 
 			var loads = response.data;
-			var liveloads = loads.slice(0, 5);
+			var liveloads = loads.slice(0, 8);
 			var features = toGeoJSON(loads);
 			loadMapData(features);
 			renderTable(liveloads);
