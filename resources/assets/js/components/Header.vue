@@ -16,7 +16,7 @@
     export default {
         props: ['origin'],
         mounted(){
-            //set global origin = whatever get here
+            console.log('Header is mounted');
         },
         data(){
             return {
