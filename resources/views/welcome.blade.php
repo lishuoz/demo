@@ -8,7 +8,8 @@
 				<bl-menu default-item="home"></bl-menu>
 			</div>
 			<div class="column is-10">
-				<bl-header origin="{{$origin}}"></bl-header>
+				<!-- <bl-header origin="{{$origin}}"></bl-header> -->
+				<h1 id="origin">Toronto, ON, Canada</h1>
 				<div class="columns">
 					<div class="column is-8">
 						<div class="box">

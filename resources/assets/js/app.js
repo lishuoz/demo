@@ -36,21 +36,6 @@
  		origin: 'Canada',
  	},
  	methods:{
- 		// changeOrigin(newOrigin){
- 		// 	// this.origin = newOrigin
- 		// 	console.log(newOrigin)
- 		// },
- 		// getOrigin(){
- 		// 	if(this.firstVisit && this.getParameterByName('origin') != null){
- 		// 		this.origin = this.getParameterByName('origin');
- 		// 		firstVisit = false;
- 		// 	}else if(!this.firstVisit){
- 		// 		this.origin = this.origin
- 		// 	}else{
- 		// 		this.origin = 'Canada'
- 		// 	}
-
- 		// },
  		getParameterByName(name, url) {
  			if (!url) url = window.location.href;
  			name = name.replace(/[\[\]]/g, "\\$&");

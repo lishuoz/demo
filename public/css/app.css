@@ -1,1 +1,12 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);#login-form *,#signup-form *{margin:7px auto}#loads-progress{margin-top:1rem}
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+#signup-form *,
+#login-form * {
+  margin: 7px auto;
+}
+
+#loads-progress {
+  margin-top: 1rem;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInJlc291cmNlcy9hc3NldHMvc2Fzcy9hcHAuc2NzcyJdLCJzb3VyY2VzQ29udGVudCI6WyJcbi8vIEZvbnRzXG5AaW1wb3J0IHVybChodHRwczovL2ZvbnRzLmdvb2dsZWFwaXMuY29tL2Nzcz9mYW1pbHk9UmFsZXdheTozMDAsNDAwLDYwMCk7XG5cbi8vICR0dXJxdW9pc2U6ICMwMDU0OUU7XG5cbi8vIEBpbXBvcnQgJ25vZGVfbW9kdWxlcy9idWxtYS9idWxtYS5zYXNzJztcblxuLy8gVmFyaWFibGVzXG4jc2lnbnVwLWZvcm0gKiwgI2xvZ2luLWZvcm0gKntcblx0bWFyZ2luOiA3cHggYXV0bztcbn1cblxuI2xvYWRzLXByb2dyZXNze1xuXHRtYXJnaW4tdG9wOiAxcmVtO1xufVxuXG4iXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBRUEsT0FBTyxDQUFDLGdFQUFJO0FBT1osQUFBYSxZQUFELENBQUMsQ0FBQyxFQUFFLEFBQVksV0FBRCxDQUFDLENBQUMsQ0FBQTtFQUM1QixNQUFNLEVBQUUsUUFBUTtDQUNoQjs7QUFFRCxBQUFBLGVBQWUsQ0FBQTtFQUNkLFVBQVUsRUFBRSxJQUFJO0NBQ2hCIn0= */
