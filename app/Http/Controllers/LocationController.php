@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 class LocationController extends Controller
 {
 	public function welcome(Request $request){
+
+		// dd($request->ip());
+
 		// Detect if come from Betterloads.com
 		if($request->has('origin')){
 			$origin = $request->origin;
@@ -18,7 +21,7 @@ class LocationController extends Controller
 		}
 
 		// Get GEO Location of the user
-		$location = \Location::get($request->ip);
+		$location = \Location::get($request->ip());
 
 		// Compare with origin 
 		// If location != origin, we ask if they are looking for loads from location to origin

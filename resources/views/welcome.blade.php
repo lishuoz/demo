@@ -9,6 +9,7 @@
 			</div>
 			<div class="column is-10">
 				<bl-header origin="{{$origin}}"></bl-header>
+				<p class="subtitle is-5">Are you in {{$location->cityName}}, {{$location->regionName}}?</p>
 				<div class="columns">
 					<div class="column is-8">
 						<div class="box">
