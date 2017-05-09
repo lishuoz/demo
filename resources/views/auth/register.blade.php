@@ -23,19 +23,33 @@
 
   <div class="hero-body">
     <div class="container">
-      <div class="column is-offset-7 is-4" >
+      <div class="column is-offset-7 is-4">
         <h1 class="title is-3">Sign up for Better Loads</h1>
         <form class="form-horizontal" id="signup-form" role="form" method="POST" action="{{ route('register') }}">
+          
           {{ csrf_field() }}
+
           <div class="field">
-            <p class="control has-icons-left has-icons-right">
-              <input class="input is-medium {{ $errors->has('name') ? ' is-danger' : '' }}" value="{{ old('name') }}" name="name" type="text" placeholder="Name" required>
+            <p class="control has-icons-left">
+              <input class="input is-medium {{ $errors->has('firstName') ? ' is-danger' : '' }}" value="{{ old('firstName') }}" name="firstName" type="text" placeholder="First Name" required>
               <span class="icon is-small is-left">
                 <i class="fa fa-user" aria-hidden="true"></i>
               </span>
             </p>
-            @if ($errors->has('name'))
-            <p class="help is-danger">{{ $errors->first('name') }}</p>
+            @if ($errors->has('firstName'))
+            <p class="help is-danger">{{ $errors->first('firstName') }}</p>
+            @endif
+          </div>
+
+          <div class="field">
+            <p class="control has-icons-left">
+              <input class="input is-medium {{ $errors->has('lastName') ? ' is-danger' : '' }}" value="{{ old('lastName') }}" name="lastName" type="text" placeholder="Last Name" required>
+              <span class="icon is-small is-left">
+                <i class="fa fa-user" aria-hidden="true"></i>
+              </span>
+            </p>
+            @if ($errors->has('lastName'))
+            <p class="help is-danger">{{ $errors->first('lastName') }}</p>
             @endif
           </div>
 
@@ -74,7 +88,6 @@
             <p class="help is-danger">{{ $errors->first('password') }}</p>
             @endif
           </div>
-
           <div class="field">
             <p class="control has-icons-left has-icons-right">
               <input class="input is-medium {{ $errors->has('password') ? ' is-danger' : '' }}" type="password" placeholder="Confirm Password" name="password_confirmation" required>
