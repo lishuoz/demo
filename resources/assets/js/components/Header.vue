@@ -16,7 +16,7 @@
     export default {
         props: ['origin'],
         mounted(){
-            console.log('Header is mounted');
+            // console.log('Header is mounted');
         },
         data(){
             return {

@@ -7,13 +7,14 @@ use Illuminate\Http\Request;
 class LocationController extends Controller
 {
 	public function welcome(Request $request){
-		$origin = 'Canada';
 		// Detect if come from Betterloads.com
 		if($request->has('origin')){
 			$origin = $request->origin;
 			$request->session()->put('origin', $origin);
-		}else{
+		}else if($request->session()->has('origin')){
 			$origin = $request->session()->get('origin');
+		}else{
+			$origin = 'Canada';
 		}
 
 		// Get GEO Location of the user

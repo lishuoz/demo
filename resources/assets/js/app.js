@@ -30,7 +30,7 @@
  const app = new Vue({
  	el: '#app',
  	mounted(){
- 		console.log('app mounted');
+ 		// console.log('app mounted');
  	},
  	data:{
  		origin: 'Canada',
