@@ -63,7 +63,7 @@ class RegisterController extends Controller
         $url = "https://crm.zoho.com/crm/private/xml/Leads/insertRecords?";
         $xmlData = '<Leads>
         <row no="1">
-            <FL val="Form ID">Registration Form</FL>
+            <FL val="FormId">Registration Form</FL>
             <FL val="First Name">'.$data["firstName"].'</FL>
             <FL val="Last Name">'.$data["lastName"].'</FL>
             <FL val="Email">'.$data["email"].'</FL>
