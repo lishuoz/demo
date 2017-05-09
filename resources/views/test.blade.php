@@ -4,4 +4,6 @@
 
 @endsection
 
+@section('script-footer')
 
+@endsection
