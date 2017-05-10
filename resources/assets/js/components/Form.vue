@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="block">
-			<form>
+			<form action="/loads" method="get">
 				<div class="field is-horizontal">
 					<div class="field-body">
 						<div class="field is-grouped">
@@ -27,9 +27,9 @@
 
 <script>
 	export default {
+		// props: ['origin'],
 		mounted() {
-			// document.getElementById('autoOrigin').value = this.getParameterByName('origin');
-			// document.getElementById('autoDestination').value = this.getParameterByName('destination');
+			// console.log(this.origin);
 		},
 		data(){
 			return {
@@ -39,13 +39,13 @@
 		},
 		methods: {
 			submitForm(){
-				var origin = document.getElementById('autoOrigin').value;
-				var destination = document.getElementById('autoDestination').value;
+				var myorigin = document.getElementById('autoOrigin').value;
+				var mydestination = document.getElementById('autoDestination').value;
 				var self = this;
 				axios.get('/fetch', {
 					params:{
-						origin: origin,
-						destination: destination,
+						origin: myorigin,
+						destination: mydestination,
 					}
 				})
 				.then(function (response) {

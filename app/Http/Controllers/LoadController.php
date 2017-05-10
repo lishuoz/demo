@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class LoadController extends Controller
 {	
 	
@@ -24,10 +25,6 @@ class LoadController extends Controller
 				array_push($loads, $json[$i]);
 			}
 		}
-		// if (Auth::check()) {
-		// 	return $loads;
-		// }
-		// $loads = array_slice($loads, 0, 5);
 		$data = array(
 			'loads' => $loads,
 			'auth' => Auth::check(),
@@ -47,32 +44,36 @@ class LoadController extends Controller
 		return $json[rand(0, count($json))];
 	}
 
-	// public function index(Request $request){
-	// 	if (empty($request->all())){
-	// 		return view('landing');
-	// 	}
+	public function loads(Request $request){
+		if($request->has('origin') && $request->has('destination')){
 
-	// 	//Get json file from api
-	// 	$path = storage_path() . "/json/loads.json";
-	// 	$json = json_decode(file_get_contents($path), true);
+			$loads = array();
+			$origin = $request->origin;
+			$destination = $request->destination;
 
-	// 	//Separate string from query into city, province, and country
-	// 	list($origin_city, $origin_province, $orgin_country) = explode(", ", $request->origin);
-	// 	list($dest_city, $dest_province, $dest_country) = explode(", ", $request->dest);
+			// Separate string from query into city, province, and country
+			list($origin_city, $origin_province, $orgin_country) = explode(", ", $request->origin);
+			list($destination_city, $destination_province, $destination_country) = explode(", ", $request->destination);
+			
+			//Get json file from api
+			$path = storage_path() . "/json/loads.json";
+			$json = json_decode(file_get_contents($path), true);
 
-	// 	$loads = array();
-	// 	for($i=0; $i<count($json); $i++){
-	// 		if($json[$i]['origin_province'] == $origin_province && $json[$i]['destination_province'] == $dest_province ){
-	// 			array_push($loads, $json[$i]);
-	// 		}
-	// 	}
+			for($i=0; $i<count($json); $i++){
+				if($json[$i]['origin_province'] == $origin_province && $json[$i]['destination_province'] == $destination_province ){
+					array_push($loads, $json[$i]);
+				}
+			}
 
-	// 	$data = array(
-	// 		// 'origin' => $request->origin,
-	// 		// 'dest' => $request->dest,
-	// 		// 'loads' => $loads,
-	// 		'auth' => 'tet',
-	// 		);
-	// 	return $data;
-	// }
+			$data = array(
+				'origin' => $origin,
+				'destination' => $destination,
+				'loads' => $loads,
+				);
+
+			return view('loads')->with($data);
+		}
+
+		return view('loads');
+	}
 }

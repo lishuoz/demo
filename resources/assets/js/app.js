@@ -25,6 +25,7 @@
  Vue.component('bl-header', require('./components/Header.vue'));
  Vue.component('bl-calculator', require('./components/Calculator.vue'));
  Vue.component('bl-calculator-chart', require('./components/CalculatorChart.vue'));
+ // Vue.component('bl-checkout', require('./components/Checkout.vue'));
 
 
  const app = new Vue({

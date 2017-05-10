@@ -15,28 +15,7 @@
 				<h1 class="title is-3">Search Your Loads</h1>
 				<div class="columns">
 					<div class="column is-8">
-						<form action="/loads" method="get" class="block">
-							<div class="field is-horizontal">
-								<div class="field-body">
-									<div class="field is-grouped">
-										<p class="control is-expanded">
-											<input class="input is-medium" id="autoOrigin" type="text" placeholder="Origin" name="origin" value="{{ empty($origin) ? '' : $origin }}" required autofocus>
-										</p>
-									</div>
-									<div class="field">
-										<p class="control is-expanded">
-											<input class="input is-medium" id="autoDestination" type="text" placeholder="Destination" value="{{ empty($destination) ? '' : $destination }}" name="destination" required>
-										</p>
-									</div>
-									<button class="button is-medium is-primary">Search Loads</button>
-								</div>
-							</div>
-						</form>
-
-						@if(!empty($loads))
-						<bl-loadlist :loads="{{json_encode($loads)}}" :auth="{{json_encode(Auth::check())}}"></bl-loadlist>
-						@endif
-
+						<bl-form></bl-form>
 					</div>
 					<div class="column is-4">
 						<div class="box">
