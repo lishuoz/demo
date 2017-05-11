@@ -170,6 +170,7 @@ return [
 
         // Geolocation
         Stevebauman\Location\LocationServiceProvider::class,
+        \Torann\GeoIP\GeoIPServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -230,6 +231,7 @@ return [
     'View' => Illuminate\Support\Facades\View::class,
     
     'Location' => Stevebauman\Location\Facades\Location::class,
+    'GeoIP' => \Torann\GeoIP\Facades\GeoIP::class,
 
     ],
 

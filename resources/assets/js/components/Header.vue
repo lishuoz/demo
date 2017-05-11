@@ -1,14 +1,14 @@
 <template>
     <div>
-        <h1 class="title is-3" id="origin" v-show="!show"><a @click="showInput">{{title}}</a></h1>
+    <h1 class="title is-3" id="origin" v-show="!show"><a @click="showInput">{{title}}</a></h1>
         <div class="field has-addons column is-half" v-show="show">
           <p class="control">
             <input class="input is-medium" id="autoOrigin" type="text" name="origin" required autofocus>
         </p>
         <p class="control">
-         <a class="button is-medium is-primary" @click="changeHeader">Change</a>
-     </p>
- </div>
+           <a class="button is-medium is-primary" @click="changeHeader">Change</a>
+       </p>
+   </div>
 </div>
 </template>
 

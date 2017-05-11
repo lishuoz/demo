@@ -3,16 +3,18 @@
     <header class="card-header" @click="show = !show">
       <p class="card-header-title">
         <span class="column ">
-          <small>AVAILABLE</small>
-          <p class="title is-4">{{load.date}}</p>
+          <p class="subtitle is-6"><small>AVAILABLE</small>
+          </p>
+          <p class="title is-5"><strong>{{load.date}}</strong></p>
         </span>
         <span class="column">
-          <small>ORIGIN</small>
-          <p class="title is-4">{{load.origin_city}}, {{load.origin_province}}</p>
+          <p class="subtitle is-6"><small>ORIGIN</small>
+          </p>
+          <p class="title is-5"><strong>{{load.origin_city}}, {{load.origin_province}}</strong></p>
         </span>
         <span class="column">
-          <small>DESTINATION</small>
-          <p class="title is-4">{{load.destination_city}}, {{load.destination_province}}</p>
+          <p class="subtitle is-6"><small>DESTINATION</small></p>
+          <p class="title is-5"><strong>{{load.destination_city}}, {{load.destination_province}}</strong></p>
         </span>
       </p>
       <a class="card-header-icon">
@@ -26,26 +28,27 @@
       <div class="content columns">
         <div class="column is-one-third">
           <small>TYPE</small>
-          <p class="title is-4">{{load.type}}</p>
+          <p class="title is-5"><strong>{{load.type}}</strong></p>
         </div>
         <div class="column is-one-third">
           <small>SIZE</small>
-          <p class="title is-4">{{load.size}}</p>
+          <p class="title is-5"><strong>{{load.size}}</strong></p>
         </div>
         <div class="column is-one-third">
           <small>RATES</small>
-          <p class="title is-4"><span class="tag is-medium is-success">+ 5.00%</span></p>
+          <p class="title is-5"><span class="tag is-success">+ 5.00%</span></p>
         </div>
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
   export default {
     props: ['load'],
     mounted() {
-      console.log('Component mounted.')
+
     },
     data(){
       return {
@@ -58,7 +61,7 @@
 /*    .card-header-column{
       padding: 0 !important;
     }*/
-  .load-card{
-    margin: 10px auto;
-  }
-</style>
+    .load-card{
+      margin: 10px auto;
+    }
+  </style>

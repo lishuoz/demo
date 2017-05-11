@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,7 +15,7 @@ use Illuminate\Http\Request;
 Route::get('/', 'LocationController@welcome');
 
 Route::get('/test', function (Request $request) {
-	return 'test';
+	// dd(geoip($ip= "204.101.249.132"));
 });
 
 Route::get('/testview', function (Request $request) {

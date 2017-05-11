@@ -2262,12 +2262,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['load'],
-  mounted: function mounted() {
-    console.log('Component mounted.');
-  },
+  mounted: function mounted() {},
   data: function data() {
     return {
       show: false
@@ -2281,6 +2282,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -4986,7 +4988,7 @@ exports.push([module.i, "\n#vuemap{\n  height: 400px;\n}\n", ""]);
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(8)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*    .card-header-column{\n      padding: 0 !important;\n    }*/\n.load-card{\n    margin: 10px auto;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*    .card-header-column{\n      padding: 0 !important;\n    }*/\n.load-card{\n      margin: 10px auto;\n}\n  ", ""]);
 
 /***/ }),
 /* 43 */
@@ -32998,17 +33000,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "card-header-title"
   }, [_c('span', {
     staticClass: "column "
-  }, [_c('small', [_vm._v("AVAILABLE")]), _vm._v(" "), _c('p', {
-    staticClass: "title is-4"
-  }, [_vm._v(_vm._s(_vm.load.date))])]), _vm._v(" "), _c('span', {
+  }, [_vm._m(0), _vm._v(" "), _c('p', {
+    staticClass: "title is-5"
+  }, [_c('strong', [_vm._v(_vm._s(_vm.load.date))])])]), _vm._v(" "), _c('span', {
     staticClass: "column"
-  }, [_c('small', [_vm._v("ORIGIN")]), _vm._v(" "), _c('p', {
-    staticClass: "title is-4"
-  }, [_vm._v(_vm._s(_vm.load.origin_city) + ", " + _vm._s(_vm.load.origin_province))])]), _vm._v(" "), _c('span', {
+  }, [_vm._m(1), _vm._v(" "), _c('p', {
+    staticClass: "title is-5"
+  }, [_c('strong', [_vm._v(_vm._s(_vm.load.origin_city) + ", " + _vm._s(_vm.load.origin_province))])])]), _vm._v(" "), _c('span', {
     staticClass: "column"
-  }, [_c('small', [_vm._v("DESTINATION")]), _vm._v(" "), _c('p', {
-    staticClass: "title is-4"
-  }, [_vm._v(_vm._s(_vm.load.destination_city) + ", " + _vm._s(_vm.load.destination_province))])])]), _vm._v(" "), _c('a', {
+  }, [_vm._m(2), _vm._v(" "), _c('p', {
+    staticClass: "title is-5"
+  }, [_c('strong', [_vm._v(_vm._s(_vm.load.destination_city) + ", " + _vm._s(_vm.load.destination_province))])])])]), _vm._v(" "), _c('a', {
     staticClass: "card-header-icon"
   }, [_c('span', {
     staticClass: "icon"
@@ -33029,19 +33031,31 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "column is-one-third"
   }, [_c('small', [_vm._v("TYPE")]), _vm._v(" "), _c('p', {
-    staticClass: "title is-4"
-  }, [_vm._v(_vm._s(_vm.load.type))])]), _vm._v(" "), _c('div', {
+    staticClass: "title is-5"
+  }, [_c('strong', [_vm._v(_vm._s(_vm.load.type))])])]), _vm._v(" "), _c('div', {
     staticClass: "column is-one-third"
   }, [_c('small', [_vm._v("SIZE")]), _vm._v(" "), _c('p', {
-    staticClass: "title is-4"
-  }, [_vm._v(_vm._s(_vm.load.size))])]), _vm._v(" "), _vm._m(0)])])])
+    staticClass: "title is-5"
+  }, [_c('strong', [_vm._v(_vm._s(_vm.load.size))])])]), _vm._v(" "), _vm._m(3)])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('p', {
+    staticClass: "subtitle is-6"
+  }, [_c('small', [_vm._v("AVAILABLE")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('p', {
+    staticClass: "subtitle is-6"
+  }, [_c('small', [_vm._v("ORIGIN")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('p', {
+    staticClass: "subtitle is-6"
+  }, [_c('small', [_vm._v("DESTINATION")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "column is-one-third"
   }, [_c('small', [_vm._v("RATES")]), _vm._v(" "), _c('p', {
-    staticClass: "title is-4"
+    staticClass: "title is-5"
   }, [_c('span', {
-    staticClass: "tag is-medium is-success"
+    staticClass: "tag is-success"
   }, [_vm._v("+ 5.00%")])])])
 }]}
 module.exports.render._withStripped = true
@@ -33134,7 +33148,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }
   }), _vm._v(" "), _c('div', {
-    staticClass: "modal-content animated flip"
+    staticClass: "modal-content animated flipInY"
   }, [_c('div', {
     staticClass: "box"
   }, [_c('div', {

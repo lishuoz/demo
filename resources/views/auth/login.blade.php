@@ -10,20 +10,26 @@
         <div class="nav-left">
           <a class="nav-item" href="/">
            <img src="/img/BL_logo.png" alt="Better Loads logo">
-          </a>
-        </div>
-        <span class="nav-toggle">
-          <span></span>
-          <span></span>
-          <span></span>
-        </span>
-      </div>
-    </header>
-  </div>
+         </a>
+       </div>
+       <span class="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+    </div>
+  </header>
+</div>
 
-  <div class="hero-body">
-    <div class="container">
-      <div class="column is-offset-7 is-4" >
+<div class="hero-body">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-offset-1 is-5">
+        <figure class="image">
+          <img src="/img/brand.svg" style="width: 500px">
+        </figure>
+      </div>
+      <div class="column is-offset-1 is-4">
         <h1 class="title is-3">Log in to Better Loads</h1>
         <p class="subtitle is-5">Or create a free account now <a href="/register">Sign up</a></p>
         <form role="form" id="login-form" method="POST" action="{{ route('login') }}">
@@ -68,6 +74,7 @@
       </div>
     </div>
   </div>
+</div>
 </section>
 <!-- <div class="form-group">
     <div class="col-md-8 col-md-offset-4">

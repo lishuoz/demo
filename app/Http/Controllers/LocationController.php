@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use \Torann\GeoIP\Facades\GeoIP;
 
 class LocationController extends Controller
 {
 	public function welcome(Request $request){
 
-		// dd($request->ip());
+
 
 		// Detect if come from Betterloads.com
 		if($request->has('origin')){
@@ -21,7 +22,9 @@ class LocationController extends Controller
 		}
 
 		// Get GEO Location of the user
-		$location = \Location::get($request->ip());
+		// $location = \Location::get($request->ip());
+		$location = geoip($ip = $request->ip());
+
 
 		// Compare with origin 
 		// If location != origin, we ask if they are looking for loads from location to origin

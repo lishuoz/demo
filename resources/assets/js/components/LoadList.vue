@@ -25,7 +25,7 @@
 
    <div class="modal" :class="{'is-active': showRegisterModal}">
     <div class="modal-background" @click="showRegisterModal = false"></div>
-    <div class="modal-content animated flip">
+    <div class="modal-content animated flipInY">
      <div class="box">
        <div class="columns">
          <div class="column is-half">
@@ -126,6 +126,7 @@
   </ul>
 </nav>
 </div>
+
 </template>
 
 <script>

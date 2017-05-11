@@ -39,7 +39,7 @@
 
 					</div>
 					<div class="column is-4">
-						<div class="box">
+						<div class="box animated fadeInUp">
 							<nav class="level">
 								<div class="is-pulled-left has-text-left">
 									<p class="heading">Loads This Month</p>
@@ -52,7 +52,7 @@
 							</nav>
 							<progress class="progress is-primary is-large" id="loads-progress" value="30" max="100">30%</progress>
 						</div>
-						<div class="box">
+						<div class="box animated fadeInUp">
 							<h2 class="title is-5"><strong>March 2017 Top Active Lanes</strong></h2>
 							<table class="table">
 								<thead>
@@ -66,17 +66,17 @@
 									<tr>
 										<td>Regina</td>
 										<td>Toronto</td>
-										<td><a href="" class="button is-outlined is-primary">Search</a></td>
+										<td><a href="/loads?origin=Regina%2C+SK%2C+Canada&destination=Toronto%2C+ON%2C+Canada" class="button is-outlined is-primary">Search</a></td>
 									</tr>
 									<tr>
 										<td>Toronto</td>
 										<td>Regina</td>
-										<td><a href="" class="button is-outlined is-primary">Search</a></td>
+										<td><a href="/loads?origin=Toronto%2C+ON%2C+Canada&destination=Regina%2C+SK%2C+Canada" class="button is-outlined is-primary" class="button is-outlined is-primary">Search</a></td>
 									</tr>
 									<tr>
 										<td>Moncton</td>
 										<td>Halifax</td>
-										<td><a href="" class="button is-outlined is-primary">Search</a></td>
+										<td><a href="loads?origin=Moncton%2C+NB%2C+Canada&destination=Halifax%2C+NS%2C+Canada" class="button is-outlined is-primary">Search</a></td>
 									</tr>
 								</tbody>
 							</table>
