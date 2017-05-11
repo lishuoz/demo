@@ -19,13 +19,16 @@
       </p>
       <a class="card-header-icon">
         <span class="icon">
-          <i class="fa fa-angle-down" v-if="!show" ></i>
+          <i class="fa fa-angle-down" v-if="!show"></i>
           <i class="fa fa-angle-up" v-if="show"></i>
         </span>
       </a>
     </header>
     <div class="card-content" v-show="show" >
       <div class="content columns is-multiline">
+        <div class="column is-full">
+          <bl-map :id="id" class="authed-load-map" :init="!show"></bl-map>
+        </div>
         <div class="column is-one-quarter">
           <small>TYPE</small>
           <p class="title is-5"><strong>{{load.type}}</strong></p>
@@ -35,58 +38,53 @@
           <p class="title is-5"><strong>{{load.size}}</strong></p>
         </div>
         <div class="column is-one-quarter">
-          <small>DETAILS</small>
-          <p class="title is-5">
-           <span class="icon" title="Rates Per Mile">
-            <i class="fa fa-usd" aria-hidden="true"></i>
-          </span>
-          <span class="icon" title="Ratio Trend">
-            <i class="fa fa-bar-chart" aria-hidden="true"></i>
-          </span>
-          <span class="icon" title="Contact Info">
-            <i class="fa fa-address-card-o" aria-hidden="true"></i>
-          </span>
-          <span class="icon" title="Insurance">
-            <i class="fa fa-file-text-o" aria-hidden="true"></i>
-          </span>
-        </p>
-      </div>
-        <!-- <div class="column is-one-quarter">
+          <small>RATES</small>
+          <p class="title is-5"><span class="tag is-success">+ 5.00%</span></p>
+        </div>
+        <div class="column is-one-quarter">
+
+        </div> 
+        <div class="column is-one-quarter">
           <small>COMPANY NAME</small>
           <p class="title is-5 blurred"><strong>Blurred Text</strong></p>
-        </div> -->
+        </div>
         <div class="column is-one-quarter">
-          <a @click="emitPopModal" class="button is-primary is-medium animated rubberBand">Load Details</a>
+          <small>PHONE NO.</small>
+          <p class="title is-5 blurred"><strong>Blurred Text</strong></p>
+        </div>
+        <div class="column is-one-quarter">
+          <small>INSURANCE</small>
+          <p class="title is-5 blurred"><strong>Blurred Text</strong></p>
+        </div>
+        <div class="column is-one-quarter">
+          <small>CREDITS</small>
+          <p class="title is-5 blurred"><strong>Blurred Text</strong></p>
         </div>
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
   export default {
-    props: ['load'],
-    mounted() {
+    props: ['load', 'id'],
+    mounted(){
 
     },
     data(){
       return {
         show: false,
+        activate: false,
       }
     },
-    methods:{
-      emitPopModal(){
-       this.$emit('show');
-     }
-   }
- }
+  }
 </script>
 <style>
-/*    .card-header-column{
-      padding: 0 !important;
-    }*/
-    .load-card{
-      margin: 10px auto;
-    }
-  </style>
+  .load-card{
+    margin: 10px auto;
+  }
+  .authed-load-map{
+    height: 250px;
+    width: 100%;
+  }
+</style>

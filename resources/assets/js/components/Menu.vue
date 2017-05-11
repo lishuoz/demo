@@ -23,7 +23,7 @@
     <ul class="menu-list">
       <li><a>Support</a></li>
       <li><a>Chat</a></li>
-      <li><a>Contact Us</a></li>
+      <li><a @click="changeUrl">Contact Us</a></li>
     </ul>
   </aside>
 </template>
@@ -42,6 +42,10 @@
       },
       setActive(menuItem){
         this.activeItem = menuItem
+      },
+      changeUrl(){
+        window.location.href = window.location.href + '#contactform';
+        location.reload();
       }
     },
   }

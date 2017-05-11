@@ -21,10 +21,13 @@
  Vue.component('bl-map', require('./components/Map.vue'));
  Vue.component('bl-loadlist', require('./components/LoadList.vue'));
  Vue.component('bl-load', require('./components/Load.vue'));
+  Vue.component('bl-authedload', require('./components/AuthedLoad.vue'));
+
  Vue.component('bl-header', require('./components/Header.vue'));
  Vue.component('bl-calculator', require('./components/Calculator.vue'));
  Vue.component('bl-calculator-chart', require('./components/CalculatorChart.vue'));
  // Vue.component('bl-checkout', require('./components/Checkout.vue'));
+ Vue.component('bl-signupmodal', require('./components/SignUpModal.vue'));
 
 
  const app = new Vue({

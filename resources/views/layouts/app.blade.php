@@ -28,6 +28,11 @@
     #liveloads *{
       margin: 15px auto;
     }
+    .blurred {
+      color: transparent !important;
+      text-shadow: 0 0 15px rgba(0,0,0,0.5) !important;
+    }
+
 
   </style>
   <!-- Scripts -->
@@ -72,6 +77,15 @@
     }
   </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNHgtcSe8bnt6Z4zBuZjgovVqsa5F_WN0&libraries=places&callback=initAutocomplete&officeAddressAutoComplete" async defer></script>
+
+  <!-- Contact Page Script -->
+  <script>
+    (function(w,d,s,u,g,a,b){w['GetFeedbackObject']=g;w[g]=w[g]||function(){
+      (w[g].q=w[g].q||[]).push(arguments)};a=d.createElement(s),
+      b=d.getElementsByTagName(s)[0];a.async=1;a.src=u;b.parentNode.insertBefore(a,b)
+    })(window,document,'script','//websites.cdn.getfeedback.com/embed/ziiJMrdmiq/gf.js','gf')
+  </script>
+
   @yield('script-footer')
 </body>
 </html>

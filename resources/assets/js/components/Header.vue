@@ -1,6 +1,7 @@
 <template>
     <div>
-    <h1 class="title is-3" id="origin" v-show="!show"><a @click="showInput">{{title}}</a></h1>
+    <h1 class="title is-3" id="origin" v-show="!show"><a @click="showInput">{{title}}</a><a class="button is-link" @click="showInput">Change Location</a>
+        </h1>
         <div class="field has-addons column is-half" v-show="show">
           <p class="control">
             <input class="input is-medium" id="autoOrigin" type="text" name="origin" required autofocus>
