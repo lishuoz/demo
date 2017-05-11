@@ -9,7 +9,9 @@
 			</div>
 			<div class="column is-10">
 				<bl-header origin="{{$origin}}"></bl-header>
-				<p class="subtitle is-5">Are you in {{$location->city}}, {{$location->state}}?</p>
+				@if(!$match)
+				<p class="subtitle is-5">Want loads from <strong>{{$location}}</strong> to <strong>{{$origin}}</strong>? <a href="/loads?origin={{$location}}&destination={{$origin}}">Find Loads</a></p>
+				@endif
 				<div class="columns">
 					<div class="column is-8">
 						<div class="box">

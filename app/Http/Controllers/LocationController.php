@@ -9,8 +9,9 @@ class LocationController extends Controller
 {
 	public function welcome(Request $request){
 
+		$location = geoip($ip = $request->ip());
 
-
+		$locationString = $location->city.', '.$location->state.', '.$location->country;
 		// Detect if come from Betterloads.com
 		if($request->has('origin')){
 			$origin = $request->origin;
@@ -18,13 +19,13 @@ class LocationController extends Controller
 		}else if($request->session()->has('origin')){
 			$origin = $request->session()->get('origin');
 		}else{
-			$origin = 'Canada';
+			$origin = $location->city.', '.$location->state.', '.$location->country;
 		}
 
 		// Get GEO Location of the user
 		// $location = \Location::get($request->ip());
-		$location = geoip($ip = $request->ip());
-
+		
+		
 
 		// Compare with origin 
 		// If location != origin, we ask if they are looking for loads from location to origin
@@ -32,7 +33,8 @@ class LocationController extends Controller
 
 		$data = array(
 			'origin' => $origin,
-			'location' => $location,
+			'location' => $locationString,
+			'match' => $origin == $locationString,
 			);
 		return view('welcome')->with($data);
 	}

@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 Route::get('/', 'LocationController@welcome');
 
 Route::get('/test', function (Request $request) {
-	// dd(geoip($ip= "204.101.249.132"));
+	return $request->session()->flush();
 });
 
 Route::get('/testview', function (Request $request) {
