@@ -35,6 +35,7 @@ class LoadController extends Controller
 	public function fetchAllLoads(Request $request){
 		$path = storage_path() . "/json/live-loads.json";
 		$json = json_decode(file_get_contents($path), true);
+
 		return $json;
 	}
 

@@ -28,7 +28,7 @@ Route::post('/test', function (Request $request) {
 
 Route::get('/live', 'LoadController@live');
 
-Route::get('/fetchAllLoads', 'LoadController@fetchAllLoads');
+Route::get('/fetchAllLoads', 'LoadController@fetchAllLoads')->middleware('cors');
 
 // Route::get('/loads', function(Request $request){
 // 	$origin = \Session::get('origin');
