@@ -4,12 +4,13 @@
 
 <script>
   export default {
-    props:['id', 'init'],
+    props:['id', 'init', 'origin', 'destination'],
     data() {
-      return {}
+      return {
+      }
     },
     mounted() {
-      
+
     },
     watch: {
       init: function(){
@@ -17,7 +18,7 @@
       }
     },
     methods: {
-      createMap: function () {
+      createMap() {
         mapboxgl.accessToken = 'pk.eyJ1IjoibGlzaHVveiIsImEiOiJjaW8xdHQzNXIxYWx1dWdseTcxZG1wYzJmIn0.cUxYf1SfN7aEOUJjcjqCXA';
 
       // init the map
@@ -25,13 +26,29 @@
         container: 'vuemap'+this.id,
         style: 'mapbox://styles/mapbox/light-v9',
         minzoom: 3.5,
-        center: [-74.0073, 40.7124], // Manhattan
+        center: [-79.3832, 43.6532], // Toronto
         zoom: 10
       })
 
+      var mapOrigin = this.origin;
+      var mapDestination = this.destination;
+
       map.on('load', function() {
+        directions.setOrigin(mapOrigin);
+        directions.setDestination(mapDestination); 
         map.resize();
       })
+
+      var directions = new MapboxDirections({
+        accessToken: mapboxgl.accessToken,
+        profile: 'driving',
+        controls: {
+          'inputs': false,
+          'instructions': false,
+        },
+      });
+
+      map.addControl(directions);
 
     }
   }

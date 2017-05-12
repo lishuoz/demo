@@ -5,10 +5,10 @@
 	<div class="container">
 		<div class="columns">
 			<div class="column is-2">
-				<bl-menu default-item="rates"></bl-menu>
+				<bl-menu default-item="account"></bl-menu>
 			</div>
 			<div class="column is-10">
-				<h1 class="title is-3">Checkout</h1>
+				<h1 class="title is-3">Activate My Account</h1>
 				<div class="columns">
 					<div class="column is-8">
 						<form action="/test" method="post">
@@ -19,7 +19,7 @@
 								<hr>
 								<div class="field">
 									<label class="label">First Name</label>
-									<p class="control has-icons-left">
+									<p class="control">
 										<input class="input {{ $errors->has('firstName') ? ' is-danger' : '' }}" value="{{ old('firstName') }}" name="firstName" type="text" placeholder="" required>
 										<span class="icon is-small is-left">
 											<!-- <i class="fa fa-user" aria-hidden="true"></i> -->
@@ -31,7 +31,7 @@
 								</div>
 								<div class="field">
 									<label class="label">Last Name</label>
-									<p class="control has-icons-left">
+									<p class="control">
 										<input class="input {{ $errors->has('lastName') ? ' is-danger' : '' }}" value="{{ old('lastName') }}" name="lastName" type="text" placeholder="" required>
 									<!-- <span class="icon is-small is-left">
 										<i class="fa fa-user" aria-hidden="true"></i>
@@ -43,7 +43,7 @@
 							</div>
 							<div class="field">
 								<label class="label">Email Address</label>
-								<p class="control has-icons-left has-icons-right">
+								<p class="control">
 									<input class="input {{ $errors->has('email') ? ' is-danger' : '' }}" value="{{ old('email') }}"  name="email" type="text" placeholder="" required>
 									<!-- <span class="icon is-small is-left">
 										<i class="fa fa-envelope" aria-hidden="true"></i>
@@ -55,7 +55,7 @@
 							</div>
 							<div class="field">
 								<label class="label">Phone Number</label>
-								<p class="control has-icons-left has-icons-right">
+								<p class="control">
 									<input class="input {{ $errors->has('phone') ? ' is-danger' : '' }}" value="{{ old('phone') }}"  name="phone" type="text" placeholder="" required>
 									<!-- <span class="icon is-small is-left">
 										<i class="fa fa-phone" aria-hidden="true"></i>
@@ -101,7 +101,7 @@
 							<hr>
 							<div class="field">
 								<label class="label">Company Legal Name</label>
-								<p class="control has-icons-left has-icons-right">
+								<p class="control">
 									<input class="input {{ $errors->has('companyLegalName') ? ' is-danger' : '' }}" value="{{ old('companyLegalName') }}"  name="companyLegalName" placeholder="" type="text"  required>
 									<!-- <span class="icon is-small is-left">
 										<i class="fa fa-phone" aria-hidden="true"></i>
@@ -113,7 +113,7 @@
 							</div>
 							<div class="field">
 								<label class="label">Company Trade Name</label>
-								<p class="control has-icons-left has-icons-right">
+								<p class="control">
 									<input class="input {{ $errors->has('companyTradeName') ? ' is-danger' : '' }}" value="{{ old('companyTradeName') }}"  name="companyTradeName" type="text" placeholder="" required>
 									<!-- <span class="icon is-small is-left">
 										<i class="fa fa-phone" aria-hidden="true"></i>
@@ -125,7 +125,7 @@
 							</div>
 							<div class="field">
 								<label class="label">Office Address</label>
-								<p class="control has-icons-left has-icons-right">
+								<p class="control">
 									<input class="input {{ $errors->has('officeAddress') ? ' is-danger' : '' }}" value="{{ old('officeAddress') }}"  name="officeAddress" id="officeAddress" type="text" placeholder="" required>
 									<!-- <span class="icon is-small is-left">
 										<i class="fa fa-phone" aria-hidden="true"></i>

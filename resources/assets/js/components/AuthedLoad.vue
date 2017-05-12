@@ -27,7 +27,7 @@
     <div class="card-content" v-show="show" >
       <div class="content columns is-multiline">
         <div class="column is-full">
-          <bl-map :id="id" class="authed-load-map" :init="!show"></bl-map>
+          <bl-map :id="id" class="authed-load-map" :init="!show" :origin="originString" :destination="destinationString"></bl-map>
         </div>
         <div class="column is-one-quarter">
           <small>TYPE</small>
@@ -60,6 +60,21 @@
           <small>CREDITS</small>
           <p class="title is-5 blurred"><strong>Blurred Text</strong></p>
         </div>
+        <div class="column is-one-quarter">
+          <small>TRUCK-LOAD RATIO</small>
+          <p class="title is-5 blurred"><strong>Blurred Text</strong></p>
+        </div>
+        <div class="column is-one-quarter">
+          <small>ADDRESS</small>
+          <p class="title is-5 blurred"><strong>Blurred Text</strong></p>
+        </div>
+        <div class="column is-one-quarter">
+          <small>EMAIL</small>
+          <p class="title is-5 blurred"><strong>Blurred Text</strong></p>
+        </div>
+        <div class="column is-one-quarter">
+        <a href="/checkout" class="button is-primary is-medium animated rubberBand">Activate</a>
+        </div>
       </div>
     </div>
   </div>
@@ -77,6 +92,14 @@
         activate: false,
       }
     },
+    computed: {
+      originString(){
+        return this.load.origin_city +", " + this.load.origin_province;
+      },
+      destinationString(){
+        return this.load.destination_city +", " + this.load.destination_province;
+      }
+    }
   }
 </script>
 <style>
