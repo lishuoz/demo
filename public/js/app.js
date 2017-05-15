@@ -2452,6 +2452,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['loads', 'auth'],
@@ -2720,88 +2721,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['show'],
   data: function data() {
     return {
-      showSignUpModal: false
+      showSignUpModal: false,
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      password: '',
+      password_confirmation: ''
     };
   },
 
@@ -33341,6 +33272,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('p', {
     staticClass: "control has-icons-left"
   }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.firstName),
+      expression: "firstName"
+    }],
     staticClass: "input",
     attrs: {
       "value": "",
@@ -33348,6 +33285,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "type": "text",
       "placeholder": "First Name",
       "required": ""
+    },
+    domProps: {
+      "value": (_vm.firstName)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.firstName = $event.target.value
+      }
     }
   }), _vm._v(" "), _c('span', {
     staticClass: "icon is-small is-left"
@@ -33361,6 +33307,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('p', {
     staticClass: "control has-icons-left"
   }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.lastName),
+      expression: "lastName"
+    }],
     staticClass: "input",
     attrs: {
       "value": "",
@@ -33368,6 +33320,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "type": "text",
       "placeholder": "Last Name",
       "required": ""
+    },
+    domProps: {
+      "value": (_vm.lastName)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.lastName = $event.target.value
+      }
     }
   }), _vm._v(" "), _c('span', {
     staticClass: "icon is-small is-left"
@@ -33381,6 +33342,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('p', {
     staticClass: "control has-icons-left has-icons-right"
   }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.email),
+      expression: "email"
+    }],
     staticClass: "input",
     attrs: {
       "value": "",
@@ -33388,6 +33355,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "type": "text",
       "placeholder": "Email",
       "required": ""
+    },
+    domProps: {
+      "value": (_vm.email)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.email = $event.target.value
+      }
     }
   }), _vm._v(" "), _c('span', {
     staticClass: "icon is-small is-left"
@@ -33401,6 +33377,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('p', {
     staticClass: "control has-icons-left has-icons-right"
   }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.phone),
+      expression: "phone"
+    }],
     staticClass: "input",
     attrs: {
       "value": "",
@@ -33408,6 +33390,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "type": "text",
       "placeholder": "Phone",
       "required": ""
+    },
+    domProps: {
+      "value": (_vm.phone)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.phone = $event.target.value
+      }
     }
   }), _vm._v(" "), _c('span', {
     staticClass: "icon is-small is-left"
@@ -33421,12 +33412,27 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('p', {
     staticClass: "control has-icons-left has-icons-right"
   }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.password),
+      expression: "password"
+    }],
     staticClass: "input",
     attrs: {
       "type": "password",
       "placeholder": "Password",
       "name": "password",
       "required": ""
+    },
+    domProps: {
+      "value": (_vm.password)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.password = $event.target.value
+      }
     }
   }), _vm._v(" "), _c('span', {
     staticClass: "icon is-small is-left"
@@ -33440,12 +33446,27 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('p', {
     staticClass: "control has-icons-left has-icons-right"
   }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.password_confirmation),
+      expression: "password_confirmation"
+    }],
     staticClass: "input",
     attrs: {
       "type": "password",
       "placeholder": "Confirm Password",
       "name": "password_confirmation",
       "required": ""
+    },
+    domProps: {
+      "value": (_vm.password_confirmation)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.password_confirmation = $event.target.value
+      }
     }
   }), _vm._v(" "), _c('span', {
     staticClass: "icon is-small is-left"
@@ -33788,7 +33809,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.previousPage
     }
-  }, [_vm._v("Previous")]), _vm._v(" "), _c('a', {
+  }, [_vm._v("Previous")]), _vm._v(" "), (_vm.auth) ? _c('a', {
     staticClass: "pagination-next",
     attrs: {
       "disabled": _vm.current_page == _vm.last_page
@@ -33796,7 +33817,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.nextPage
     }
-  }, [_vm._v("Next page")]), _vm._v(" "), _c('ul', {
+  }, [_vm._v("Next page")]) : _c('a', {
+    staticClass: "pagination-next",
+    on: {
+      "click": function($event) {
+        _vm.showModal = true
+      }
+    }
+  }, [_vm._v("Next Page")]), _vm._v(" "), _c('ul', {
     staticClass: "pagination-list"
   }, [_c('li', [_c('p', [_vm._v("Page " + _vm._s(_vm.current_page) + " of " + _vm._s(_vm.last_page) + " is showing")])])])])], 1)
 },staticRenderFns: []}

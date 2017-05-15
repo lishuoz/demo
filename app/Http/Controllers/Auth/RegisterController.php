@@ -52,7 +52,8 @@ class RegisterController extends Controller
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
-    {
+    {   
+        // dd($data['firstName']);
         return Validator::make($data, [
             'firstName' => 'required|string|max:255',
             'lastName' => 'required|string|max:255',
@@ -96,7 +97,7 @@ class RegisterController extends Controller
      * @return User
      */
     protected function create(array $data)
-    {
+    {   
         $this->insertToZoho($data);
         return User::create([
             'firstName' => $data['firstName'],

@@ -19,7 +19,8 @@
     </div>
     <nav class="pagination is-medium block">
       <a class="pagination-previous" @click="previousPage" :disabled="current_page == 1">Previous</a>
-      <a class="pagination-next" @click="nextPage" :disabled="current_page == last_page">Next page</a>
+      <a class="pagination-next" v-if="auth" @click="nextPage" :disabled="current_page == last_page">Next page</a>
+      <a class="pagination-next" @click="showModal = true" v-else>Next Page</a>
       <ul class="pagination-list">
         <li>
           <p>Page {{current_page}} of {{last_page}} is showing</p>
