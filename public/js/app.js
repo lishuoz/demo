@@ -33920,6 +33920,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("Home")])]), _vm._v(" "), _c('li', [_c('a', {
     class: {
       'is-active': _vm.isActive('account')
+    },
+    attrs: {
+      "href": "/checkout"
     }
   }, [_vm._v("Active your account")])])]), _vm._v(" "), _c('p', {
     staticClass: "menu-label"

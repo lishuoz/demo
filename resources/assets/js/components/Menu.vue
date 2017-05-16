@@ -6,7 +6,7 @@
     <ul class="menu-list">
       <!-- <li><a href="/" :class="{'is-active' : isActive('home')}" @click="setActive('home')">Home</a></li> -->
       <li><a href="/" :class="{'is-active' : isActive('home')}">Home</a></li>
-      <li><a :class="{'is-active' : isActive('account')}">Active your account</a></li>
+      <li><a href="/checkout" :class="{'is-active' : isActive('account')}">Active your account</a></li>
     </ul>
     <p class="menu-label">
       Demos
